@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A working quotation review workspace. Import CSVs, inspect exceptions, preserve revisions and export reviewed rows."><title>Draftdesk — quotation review workspace</title><style>:root{--ink:#1f3a34;--muted:#6b7d73;--green:#205d46;--line:#dfe6dc;--cream:#f6f7f1;--amber:#9a651e;font-family:Inter,'Segoe UI',Arial,sans-serif;font-synthesis:none;color:var(--ink);background:var(--cream);line-height:1.5}*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit}button,a,input,summary,select{touch-action:manipulation}button{cursor:pointer;border:1px solid var(--green);border-radius:7px;padding:10px 17px;background:var(--green);color:white;font-weight:600;font-size:13px}button:hover{filter:brightness(.93)}button:disabled{opacity:.45;cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible,.table-scroll:focus-visible{outline:3px solid #cf9a43;outline-offset:3px}.secondary{background:#fff;color:var(--green);border-color:#cad8cb}.text-button{padding:6px 0;background:none;color:var(--green);border:0;font-size:12px;text-align:left}.full{width:100%}h1,h2,h3,p{margin:0}a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}header{height:80px;padding:0 38px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-size:24px;font-weight:650;letter-spacing:-1px}.brand:hover{text-decoration:none}.mark{display:grid;place-items:center;width:36px;height:36px;background:var(--green);border-radius:11px 11px 11px 2px;color:white;font-size:27px;line-height:1}.tag{font-size:9px;letter-spacing:2px;color:var(--muted);padding-left:18px;margin-left:8px;border-left:1px solid var(--line)}.header-right{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}.header-right a{margin-left:28px}.local-dot{width:6px;height:6px;background:#53996c;border-radius:50%}.layout{display:grid;grid-template-columns:226px minmax(0,1fr);min-height:calc(100vh - 80px)}aside{background:#eef2e9;border-right:1px solid var(--line);padding:35px 20px;display:flex;flex-direction:column}aside h2{font-size:18px;margin:5px 0 24px;letter-spacing:-.3px}.overline{font-size:9px;letter-spacing:1.8px;font-weight:650;color:#728677}.draft-list{margin-top:19px;display:grid;gap:7px}.draft-list button{text-align:left;background:none;color:var(--ink);border-color:transparent;white-space:normal;word-break:break-word;padding:12px;font-size:12px}.draft-list button.active{background:#fff;border-color:#cedaca}.draft-list button span{display:block;color:var(--muted);font-size:10px;font-weight:400;margin-top:4px}.aside-bottom{margin-top:auto;padding-top:45px;font-size:10px;color:#5f7463}.aside-bottom span{color:#869181;font-size:9px}.hint{font-size:11px;color:var(--muted);line-height:1.6}.draft-list>.hint{padding:10px}main{padding:40px 44px 25px;max-width:1320px;width:100%;margin:auto}.hero{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px}h1{font-size:36px;line-height:1.15;letter-spacing:-1.5px;font-weight:600;margin:14px 0}.intro{font-size:13px;color:var(--muted);line-height:1.7}.hero-index{display:flex;gap:17px;align-items:center;color:#aab5a2}.hero-index span{font-size:80px;font-weight:300;letter-spacing:-5px}.hero-index p{font-size:9px;letter-spacing:1px;line-height:2}.demo-note{padding:13px 16px;display:flex;align-items:center;gap:15px;background:#eaf0e2;border:1px solid #d7e1cc;border-radius:8px;margin-bottom:17px}.demo-label{font-size:8px;font-weight:700;letter-spacing:1px;white-space:nowrap}.demo-note p{font-size:11px;color:#5e7159;flex:1}.demo-note button{white-space:nowrap}.notice{font-size:12px;margin-bottom:16px;color:#5e725f;min-height:20px;overflow-wrap:anywhere}.notice.error{color:#93492a;background:#fff0e5;padding:11px 15px;border-radius:7px}.card{border:1px solid var(--line);background:white;border-radius:12px;overflow:hidden}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:23px 25px 18px}h2{font-size:18px;font-weight:600;letter-spacing:-.4px}.section-heading h2{margin-top:5px}.project-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:0 25px 20px}.project-row label{margin:0}label{display:block;font-size:12px;font-weight:600;margin:0 0 8px}label>span{font-size:9px;color:var(--muted);font-weight:400;margin-left:6px}.project-row input{display:block;margin-top:7px;width:100%}input:not([type=file]),select{border:1px solid #d4dfd2;border-radius:6px;background:#fcfdf9;color:var(--ink);padding:10px 11px;font-size:12px;min-width:0}input::placeholder,textarea::placeholder{color:#899588}.file-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:0 25px}.file-grid>div{min-width:0}input[type=file]{font-size:11px;padding:11px;background:#f7f9f2;border:1px dashed #cad7c4;border-radius:7px;width:100%}input::file-selector-button{background:#fff;border:1px solid #cad7c4;border-radius:4px;color:#315337;font:inherit;padding:4px 7px;margin-right:8px}details{margin:12px 0 7px}summary{cursor:pointer;font-size:10px;color:var(--muted);margin-bottom:7px}textarea{font:11px/1.7 Consolas,monospace;border:1px solid #dae3d5;border-radius:6px;background:#fcfdf9;color:#41583d;padding:10px;width:100%;resize:vertical;min-height:145px;tab-size:2}.input-actions{border-top:1px solid #e6ece0;margin:20px 25px 0;padding:17px 0;display:flex;align-items:center;justify-content:space-between;gap:20px}.input-actions p{font-size:11px;color:var(--muted)}.input-actions button span{margin-left:16px}.review-title{margin:28px 0 17px;display:flex;align-items:center;justify-content:space-between;gap:20px}.review-title h2{margin:5px 0;font-size:22px}.pill{border:1px solid #cedaca;border-radius:20px;font-size:10px;padding:5px 10px;background:#fff;white-space:nowrap}.metrics{display:grid;grid-template-columns:1fr 1fr 1.7fr;gap:13px;margin-bottom:17px}.metrics>div{padding:19px 21px;background:#fcfdf7;border:1px solid var(--line);border-radius:9px}.metrics span{font-size:9px;letter-spacing:1px;color:var(--muted);display:block}.metrics strong{font-size:30px;font-weight:550;letter-spacing:-.5px;display:block;margin-top:5px;overflow-wrap:anywhere}.metrics .total{background:#e6edde;border-color:#cddcc3}.metrics .total strong{font-size:26px}.metrics p{font-size:10px;color:#5e7357;margin-top:3px}.table-controls{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);gap:20px}.filter-tabs{display:flex;gap:4px}.filter-tabs button{border:0;background:transparent;color:var(--muted);font-size:11px;padding:7px 10px}.filter-tabs button[aria-pressed=true]{background:#eaf0e3;color:var(--green)}.search{margin:0}.search input{max-width:220px;width:100%;font-size:11px;padding:8px 10px}.table-scroll{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}th{background:#fafbf6;text-align:left;padding:12px 20px;font-size:9px;letter-spacing:.6px;color:#7a8970;font-weight:500}td{padding:15px 20px;border-top:1px solid #edf1e7;vertical-align:top}td:first-child{min-width:165px;white-space:normal}td:last-child{min-width:150px;max-width:240px;white-space:normal}td small{display:block;font-size:10px;color:var(--muted);margin-top:4px}tr.needs-review td:first-child{border-left:3px solid #c78d35;padding-left:17px}.row-status{display:inline-block;font-size:10px;border-radius:4px;padding:3px 6px;background:#edf3e8;color:#486d3f}.needs-review .row-status{background:#fff0d7;color:#956123}.review-actions{padding:17px 20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px}.review-actions p{font-size:10px;color:var(--muted);max-width:45%}.review-actions>div{display:flex;gap:8px}.review-actions button{font-size:12px}.history{display:flex;gap:12px;align-items:center;margin-top:17px;flex-wrap:wrap}.history label{margin:0;font-size:11px}.history select{font-size:11px;max-width:360px}.history p{font-size:10px;color:var(--muted)}.scope{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;margin-top:35px;padding-top:23px;border-top:1px solid var(--line)}.scope h3{font-size:12px;font-weight:600;margin-bottom:8px}.scope p{font-size:11px;color:var(--muted);line-height:1.8}footer{display:flex;gap:20px;align-items:center;margin-top:30px;padding-top:17px;border-top:1px solid var(--line);font-size:10px;color:#819077;flex-wrap:wrap}footer p{flex:1}footer a{white-space:nowrap}.empty{text-align:center;padding:28px;color:var(--muted);font-size:12px}dialog{border:1px solid var(--line);border-radius:12px;max-width:440px;padding:26px;color:var(--ink)}dialog::backdrop{background:#15251866}dialog p{font-size:13px;color:var(--muted);margin:14px 0 24px}.dialog-actions{display:flex;justify-content:flex-end;gap:10px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}@media(max-width:1150px){main{padding:30px 25px}.layout{grid-template-columns:195px minmax(0,1fr)}aside{padding:30px 15px}.hero-index{display:none}.tag{display:none}.demo-note{flex-wrap:wrap}.demo-note p{flex-basis:65%}}@media(max-width:760px){header{padding:0 18px;height:68px}.brand{font-size:22px}.header-right>span{display:none}.header-right a{margin:0;font-size:10px}.layout{display:block}aside{padding:16px 18px;border-right:0;border-bottom:1px solid var(--line);display:block}aside h2{font-size:16px;display:inline-block;margin:4px 16px 0 0}aside>.overline,.aside-bottom{display:none}aside .full{width:auto;font-size:11px;padding:7px 12px}.draft-list{display:flex;overflow:auto;margin-top:12px}.draft-list button{min-width:165px;max-width:200px;flex-shrink:0;padding:8px 10px}.draft-list>.hint{padding:0}main{padding:25px 18px}.hero{margin-bottom:20px}h1{font-size:30px}.intro{font-size:12px}.demo-note{gap:8px}.demo-note p{flex-basis:100%}.project-row,.file-grid{grid-template-columns:1fr;gap:17px;padding-left:18px;padding-right:18px}.section-heading{padding:20px 18px;align-items:flex-start}.section-heading button{max-width:110px;font-size:10px}.input-actions{margin-left:18px;margin-right:18px;align-items:flex-start;flex-direction:column;gap:12px}.input-actions button{align-self:stretch}.metrics{grid-template-columns:1fr 1fr;gap:9px}.metrics>div{padding:14px}.metrics .total{grid-column:1/-1}.table-controls{flex-wrap:wrap;gap:10px;padding:12px}.search,.search input{max-width:none;width:100%}.review-actions{flex-direction:column;align-items:stretch;padding:15px}.review-actions p{max-width:none}.review-actions>div{justify-content:space-between}.history{gap:9px}.history select{max-width:100%}.history p{width:100%}.scope{grid-template-columns:1fr;gap:17px}.review-title{gap:10px}.review-title h2{font-size:20px}footer{gap:10px}footer p{flex-basis:100%}dialog{max-width:calc(100% - 32px)}}
+</style><script type="module">// Decimal arithmetic and CSV validation for the browser-only Draftdesk preview.
+// No network, credentials, filesystem paths or external dependencies.
+const HEADERS = {
+  request: ['code', 'description', 'quantity', 'unit'],
+  catalogue: ['code', 'description', 'unit', 'unit_price', 'currency', 'price_version'],
+};
+const SAMPLE_REQUEST = `code,description,quantity,unit
+MCB-16,Circuit breaker 16A,2,EA
+CABLE-25,Cable 2.5 mm2,12.5,M
+UNKNOWN-9,Unlisted part,1,EA
+MCB-32,Circuit breaker 32A,3,BOX
+RELAY-12,Relay 12V,0,EA
+CONTACT-1,Contactor,1,EA`;
+const SAMPLE_CATALOGUE = `code,description,unit,unit_price,currency,price_version
+MCB-16,Circuit breaker 16A,EA,8.75,USD,DEMO-v1
+CABLE-25,Cable 2.5 mm2,M,1.20,USD,DEMO-v1
+MCB-32,Circuit breaker 32A,EA,12.00,USD,DEMO-v1
+RELAY-12,Relay 12V,EA,4.30,USD,DEMO-v1
+CONTACT-1,Contactor,EA,18.00,USD,DEMO-v1
+CONTACT-1,Contactor,EA,19.00,USD,DEMO-v1`;
+const CLEAN_REQUEST = `code,description,quantity,unit
+MCB-16,Circuit breaker 16A,2,EA
+CABLE-25,Cable 2.5 mm2,12.5,M
+MCB-32,Circuit breaker 32A,3,EA
+RELAY-12,Relay 12V,1,EA
+CONTACT-1,Contactor,1,EA`;
+const CLEAN_CATALOGUE = SAMPLE_CATALOGUE.split('\n').slice(0,-1).join('\n');
+const normalized = value => value.trim().replace(/\s+/g, ' ').toLowerCase();
+const currencies = new Set(['USD', 'EUR', 'GBP', 'CNY']);
+
+function parseCSV(text, kind) {
+  if (typeof text !== 'string' || new TextEncoder().encode(text).length > 700000) throw new Error('Use a CSV file smaller than 700 KB.');
+  text = text.replace(/^\uFEFF/, '');
+  const rows = []; let row = [], field = '', quoted = false, closed = false;
+  function pushField() { row.push(field); field = ''; closed = false; }
+  function pushRow() { pushField(); if (row.some(v => v.trim())) rows.push(row); row = []; }
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"') { if (text[i+1] === '"') { field += '"'; i++; } else { quoted = false; closed = true; } }
+      else field += c;
+    } else if (c === ',') pushField();
+    else if (c === '\n' || c === '\r') { if (c === '\r' && text[i+1] === '\n') i++; pushRow(); }
+    else if (c === '"') { if (field || closed) throw new Error('Invalid CSV: a quote must start a field.'); quoted = true; }
+    else { if (closed) throw new Error('Invalid CSV: unexpected text after a closing quote.'); field += c; }
+  }
+  if (quoted) throw new Error('Invalid CSV: a quoted field is not closed.');
+  if (field || row.length || closed) pushRow();
+  if (!rows.length) throw new Error('The CSV is empty. Load a sample or add a header and at least one row.');
+  const header = rows.shift().map(v => v.trim());
+  const required = HEADERS[kind];
+  if (!required || header.length !== required.length || new Set(header).size !== header.length || required.some(v => !header.includes(v))) {
+    throw new Error(`Expected these columns: ${(required || []).join(', ')}. Column order may vary.`);
+  }
+  if (!rows.length) throw new Error('Add at least one data row below the CSV header.');
+  if (rows.length > 1000) throw new Error('This preview supports up to 1,000 rows per file.');
+  return rows.map((values, index) => {
+    if (values.length !== header.length) throw new Error(`CSV record ${index + 2} has ${values.length} fields; expected ${header.length}.`);
+    return Object.fromEntries(header.map((h,i) => [h, values[i].trim()]));
+  });
+}
+
+// Scale all inputs by 10,000. Round each line half-up to cents, never binary floats.
+function decimal(value, positive = false) {
+  if (!/^(?:0|[1-9]\d{0,8})(?:\.\d{1,4})?$/.test(value)) return null;
+  const [whole, fraction = ''] = value.split('.');
+  const units = BigInt(whole) * 10000n + BigInt(fraction.padEnd(4, '0'));
+  return positive && units === 0n ? null : units;
+}
+function money(cents) { return `${cents / 100n}.${String(cents % 100n).padStart(2,'0')}`; }
+function reconcile(requestText, catalogueText) {
+  const requests = parseCSV(requestText, 'request');
+  const catalogue = parseCSV(catalogueText, 'catalogue');
+  const byCode = new Map(), repeat = new Map(), totals = new Map();
+  for (const item of catalogue) { const values = byCode.get(item.code) || []; values.push(item); byCode.set(item.code, values); }
+  for (const item of requests) { const key = JSON.stringify([item.code, normalized(item.unit)]); repeat.set(key, (repeat.get(key) || 0) + 1); }
+  const rows = requests.map((item, index) => {
+    const row = {...item, line:index + 1, status:'review', reason:'', currency:'', unit_price:'', line_total:'', price_version:''};
+    const candidates = byCode.get(item.code) || [];
+    const quantity = decimal(item.quantity, true);
+    if (!item.code) row.reason = 'Missing product code';
+    else if (repeat.get(JSON.stringify([item.code, normalized(item.unit)])) > 1) row.reason = 'Repeated request code and unit';
+    else if (quantity === null) row.reason = 'Quantity must be positive, up to 9 integer and 4 decimal digits';
+    else if (!candidates.length) row.reason = 'Code not in catalogue';
+    else if (candidates.length > 1) row.reason = 'Duplicate catalogue code';
+    else {
+      const match = candidates[0], price = decimal(match.unit_price);
+      if (!item.description || normalized(item.description) !== normalized(match.description)) row.reason = 'Description differs from catalogue';
+      else if (!item.unit || normalized(item.unit) !== normalized(match.unit)) row.reason = 'Unit differs from catalogue';
+      else if (price === null) row.reason = 'Invalid catalogue price';
+      else if (!currencies.has(match.currency)) row.reason = 'Currency must be USD, EUR, GBP or CNY';
+      else if (!match.price_version) row.reason = 'Missing price version';
+      else {
+        const cents = (quantity * price + 500000n) / 1000000n;
+        row.status = 'matched'; row.reason = 'Matched · approval pending';
+        row.currency = match.currency; row.unit_price = match.unit_price; row.line_total = money(cents); row.price_version = match.price_version;
+        totals.set(match.currency, (totals.get(match.currency) || 0n) + cents);
+      }
+    }
+    return row;
+  });
+  const reviewCount = rows.filter(r => r.status === 'review').length;
+  return {rows, reviewCount, complete:reviewCount === 0, subtotals:Object.fromEntries([...totals].map(([c,n]) => [c,money(n)]))};
+}
+function csvCell(value) {
+  let text = String(value ?? '');
+  if (/^[\s\uFEFF]*[=+\-@]/.test(text) || /^[\t\r\n]/.test(text)) text = "'" + text;
+  return /[",\r\n]/.test(text) ? '"' + text.replace(/"/g,'""') + '"' : text;
+}
+function exportCSV(result) {
+  const columns = ['line','code','description','quantity','unit','currency','unit_price','line_total','status','reason','price_version'];
+  return '\uFEFF' + [columns.join(','), ...result.rows.map(row => columns.map(c => csvCell(row[c])).join(','))].join('\r\n') + '\r\n';
+}
+
+const $ = id => document.getElementById(id);
+const KEY = 'draftdesk.preview.v1';
+let drafts = [], activeId = null, revision = null, result = null, compared = null;
+let onlyReview = false, savedView = false, storageBroken = false, saving = false, reading = false, confirmAction = null;
+const clone = value => JSON.parse(JSON.stringify(value));
+function message(text, error = false) { $('notice').textContent = text; $('notice').classList.toggle('error',error); }
+function readStore() {
+  const raw = localStorage.getItem(KEY); if (raw === null) return [];
+  const data = JSON.parse(raw);
+  if (!Array.isArray(data) || data.length > 25 || data.some(d => !d || typeof d.id !== 'string' || typeof d.title !== 'string' || !Array.isArray(d.revisions) || !d.revisions.length || d.revisions.length > 20 || d.revisions.some((r,i) => !r || r.number !== i + 1 || typeof r.request !== 'string' || typeof r.catalogue !== 'string' || typeof r.created !== 'string'))) throw new Error('Saved data could not be read. Export any visible result before clearing this site’s stored data.');
+  return data;
+}
+try { drafts = readStore(); } catch { storageBroken = true; message('Local storage is unavailable or contains unreadable data. You can still compare and export; saving is disabled to protect existing drafts.',true); }
+function inputs() { return {request:$('request-text').value, catalogue:$('catalogue-text').value}; }
+function changed() { const now = inputs(); return !!compared && (now.request !== compared.request || now.catalogue !== compared.catalogue); }
+function unsaved() {
+  if (result && !savedView) return true;
+  if (changed()) return true;
+  if (!result) return !!($('request-text').value.trim() || $('catalogue-text').value.trim() || $('name').value.trim());
+  const d = drafts.find(d => d.id === activeId), r = d?.revisions.find(r => r.number === revision);
+  return $('name').value.trim() !== (d?.title || '') || $('note').value.trim() !== (r?.note || '');
+}
+function ask(title, text, fn) {
+  if ($('confirm').open) return;
+  $('confirm-title').textContent=title; $('confirm-text').textContent=text; confirmAction=fn; $('confirm').showModal();
+}
+function guarded(fn) { if (unsaved()) ask('Discard unsaved changes?', 'Your current inputs or comparison have not been saved. Existing saved revisions will stay intact.',fn); else fn(); }
+$('cancel').addEventListener('click',()=>{confirmAction=null;$('confirm').close();});
+$('confirm').addEventListener('cancel',()=>{confirmAction=null;});
+$('confirm-action').addEventListener('click',()=>{const fn=confirmAction;confirmAction=null;$('confirm').close();fn?.();});
+function refreshButtons() {
+  const d=drafts.find(d=>d.id===activeId), historical=savedView && revision!==d?.revisions.at(-1)?.number;
+  $('save').disabled = !result || changed() || savedView || saving || reading || storageBroken;
+  $('save').textContent=saving?'Saving…':activeId?'Save new revision':'Save first revision';
+  $('export').disabled=!result || changed() || reading;
+  $('compare').disabled=historical || saving || reading;
+  for (const id of ['request-text','catalogue-text','request-file','catalogue-file','name','note','corrected']) $(id).disabled=historical || saving || reading;
+  for (const id of ['new','sample','remove']) $(id).disabled=saving || reading;
+  for (const button of $('draft-list').querySelectorAll('button')) button.disabled=saving || reading;
+  $('history').disabled=!activeId || saving || reading;
+  $('remove').hidden=!activeId;
+  if(result) $('version').textContent=changed()?'Inputs changed':savedView?`Saved · v${revision}${historical?' · read only':''}`:'Unsaved preview';
+  if (historical) $('history-note').textContent='Read-only snapshot. Select the latest revision before editing.';
+  else if (changed()) $('history-note').textContent='Compare the edited inputs again before saving or exporting.';
+  else $('history-note').textContent=savedView?'Viewing a saved snapshot. Exports use exactly these rows.':'Save this comparison to keep an immutable snapshot in this browser.';
+}
+function list() {
+  $('draft-list').replaceChildren();
+  if (!drafts.length) { const p=document.createElement('p');p.className='hint';p.textContent='Saved drafts will appear here.';$('draft-list').append(p); }
+  for (const d of [...drafts].reverse()) {
+    const b=document.createElement('button');b.textContent=d.title;b.classList.toggle('active',d.id===activeId);
+    const s=document.createElement('span');s.textContent=`${d.revisions.length} revision${d.revisions.length===1?'':'s'} · ${new Date(d.revisions.at(-1).created).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}`;b.append(s);
+    b.addEventListener('click',()=>guarded(()=>{try{drafts=readStore();openDraft(d.id);}catch(e){message(e.message,true);}}));$('draft-list').append(b);
+  }
+}
+function fillInputs(value) { $('request-text').value=value.request;$('catalogue-text').value=value.catalogue;$('request-file').value='';$('catalogue-file').value=''; }
+function reset() {
+  activeId=null;revision=null;result=null;compared=null;savedView=false;onlyReview=false;
+  fillInputs({request:'',catalogue:''});$('name').value='';$('note').value='';$('search').value='';$('review').hidden=true;
+  $('history').replaceChildren(new Option('No saved revisions',''));$('history').disabled=true;list();refreshButtons();message('New draft. Load a sample or import your own CSVs.');
+}
+function history() {
+  const d=drafts.find(d=>d.id===activeId);$('history').replaceChildren();
+  if (!d) { $('history').append(new Option('No saved revisions',''));$('history').disabled=true;return; }
+  $('history').disabled=false;
+  for (const r of [...d.revisions].reverse()) $('history').append(new Option(`v${r.number} · ${new Date(r.created).toLocaleString('en-GB')}${r.note?' · '+r.note.slice(0,45):''}`,String(r.number)));
+  $('history').value=String(revision ?? d.revisions.at(-1).number);
+}
+function openDraft(id, requested) {
+  const d=drafts.find(d=>d.id===id);if(!d){message('This draft was removed in another tab. Start a new draft.',true);list();return;}
+  const r=d.revisions.find(r=>r.number===requested)||d.revisions.at(-1);
+  let evaluated;try { evaluated=reconcile(r.request,r.catalogue); } catch(e){message('Cannot open this saved revision: '+e.message,true);return;}
+  activeId=id;revision=r.number;result=evaluated;compared={request:r.request,catalogue:r.catalogue};savedView=true;
+  fillInputs(compared);$('name').value=d.title;$('note').value=r.note||'';$('search').value='';onlyReview=false;
+  render();history();list();refreshButtons();message(`Opened ${d.title}, revision ${r.number}.`);
+}
+function rowCell(tr,text,sub='') {const td=document.createElement('td');td.textContent=text;if(sub){const s=document.createElement('small');s.textContent=sub;td.append(s);}tr.append(td);return td;}
+function rows() {
+  $('rows').replaceChildren();if(!result)return;
+  const q=$('search').value.toLocaleLowerCase().trim();
+  for(const r of result.rows) {
+    if (onlyReview&&r.status!=='review')continue;
+    if(q&&!`${r.code} ${r.description}`.toLocaleLowerCase().includes(q))continue;
+    const tr=document.createElement('tr');if(r.status==='review')tr.className='needs-review';
+    rowCell(tr,r.code||'Missing code',r.description);rowCell(tr,`${r.quantity} ${r.unit}`);
+    rowCell(tr,r.unit_price!==''?`${r.currency} ${r.unit_price}`:'—');rowCell(tr,r.line_total!==''?`${r.currency} ${r.line_total}`:'—');
+    const td=rowCell(tr,'',r.price_version);const status=document.createElement('span');status.className='row-status';status.textContent=r.reason;td.prepend(status);$('rows').append(tr);
+  }
+  $('empty').hidden=!!$('rows').children.length;
+  $('filter-all').setAttribute('aria-pressed',String(!onlyReview));$('filter-review').setAttribute('aria-pressed',String(onlyReview));
+}
+function render() {
+  if(!result)return;$('review').hidden=false;$('review-title').textContent=$('name').value.trim()||'Untitled quotation';
+  $('review-meta').textContent=savedView?'Saved source inputs · recalculated with the same validation rules':'Current input comparison · save to keep this version';
+  $('count').textContent=String(result.rows.length);$('exceptions').textContent=String(result.reviewCount);
+  $('total-label').textContent=result.complete?'DRAFT TOTAL · APPROVAL PENDING':'MATCHED SUBTOTAL';
+  $('amount').textContent=Object.entries(result.subtotals).map(([c,n])=>`${c} ${n}`).join(' / ')||'—';
+  $('total-note').textContent=result.complete?'All lines matched. Human approval is still required.':'Unresolved lines excluded. A complete quote total is withheld.';
+  rows();refreshButtons();
+}
+function loadSample(clean=false) {
+  fillInputs({request:clean?CLEAN_REQUEST:SAMPLE_REQUEST,catalogue:clean?CLEAN_CATALOGUE:SAMPLE_CATALOGUE});
+  if(!$('name').value.trim())$('name').value='North warehouse · electrical parts';
+  $('note').value=clean?'Synthetic corrections: removed unknown item, confirmed EA units and quantity, kept one approved contactor price.':'';
+  refreshButtons();message(clean?'Corrected synthetic inputs loaded. Review them, then compare and save a new revision.':'Sample loaded: six product lines with four intentional exceptions. Click Compare files.');
+}
+$('sample').addEventListener('click',()=>guarded(()=>{reset();loadSample();}));
+$('corrected').addEventListener('click',()=>{
+  // Replacing edited text needs confirmation; loading clean data from the unchanged sample does not.
+  const i=inputs(),isSample=i.request===SAMPLE_REQUEST&&i.catalogue===SAMPLE_CATALOGUE;
+  if(!isSample&&unsaved())ask('Replace current inputs?', 'This loads a corrected synthetic example. Your saved revisions will not be changed.',()=>loadSample(true));else loadSample(true);
+});
+$('new').addEventListener('click',()=>guarded(reset));
+$('compare').addEventListener('click',()=>{
+  try { const data=inputs(), evaluated=reconcile(data.request,data.catalogue);compared=data;result=evaluated;savedView=false;onlyReview=false;$('search').value='';render();message(`${result.rows.length} lines checked. ${result.reviewCount} need review. Save to retain this result.`); }
+  catch(e){message(e.message,true);refreshButtons();}
+});
+for(const id of ['request-text','catalogue-text','name','note'])$(id).addEventListener('input',refreshButtons);
+for (const [fileId,textId] of [['request-file','request-text'],['catalogue-file','catalogue-text']]) $(fileId).addEventListener('change',async()=>{
+  const file=$(fileId).files[0];if(!file || reading)return;
+  reading=true;refreshButtons();
+  try {if(!/\.csv$/i.test(file.name)||file.size>700000)throw new Error('Choose a .csv file smaller than 700 KB.');const data=await file.text();$(textId).value=data;message(`${file.name} loaded. Compare files to validate the new inputs.`);}
+  catch(e){message(e.message,true);$(fileId).value='';}finally{reading=false;refreshButtons();}
+});
+$('filter-all').addEventListener('click',()=>{onlyReview=false;rows();});$('filter-review').addEventListener('click',()=>{onlyReview=true;rows();});$('search').addEventListener('input',rows);
+$('save').addEventListener('click',async()=>{
+  if(!result||changed()||savedView||saving)return;
+  const title=$('name').value.trim();if(!title){message('Give this draft a name before saving.',true);$('name').focus();return;}
+  saving=true;refreshButtons();
+  const save=()=>{
+    const live=readStore();const d=live.find(d=>d.id===activeId);
+    if(activeId&&(!d||d.revisions.at(-1).number!==revision))throw new Error('This draft changed in another tab. Export the current comparison, then reopen the draft before saving.');
+    if(!activeId&&live.length>=25)throw new Error('This preview keeps up to 25 drafts. Export and remove an old draft first.');
+    if(d?.revisions.length>=20)throw new Error('This draft reached the 20-revision preview limit. Export it and start a new draft.');
+    const entry=d||{id:crypto.randomUUID(),title,revisions:[]};entry.title=title;
+    entry.revisions.push({number:entry.revisions.length+1,created:new Date().toISOString(),note:$('note').value.trim(),...clone(compared)});
+    if(!d)live.push(entry);
+    try {localStorage.setItem(KEY,JSON.stringify(live));}catch{throw new Error('Browser storage is full or unavailable. This result is not saved. Export CSV to keep the output.');}
+    drafts=live;activeId=entry.id;revision=entry.revisions.at(-1).number;savedView=true;history();list();render();message(`Saved revision ${revision}. You can reopen it from the sidebar.`);
+  };
+  try { if(navigator.locks)await navigator.locks.request('draftdesk-preview-save',save);else save(); }catch(e){message(e.message,true);}finally{saving=false;refreshButtons();}
+});
+$('history').addEventListener('change',()=>{const requested=Number($('history').value);$('history').value=String(revision);guarded(()=>openDraft(activeId,requested));});
+$('export').addEventListener('click',()=>{
+  if(!result||changed())return;const bytes=exportCSV(result),url=URL.createObjectURL(new Blob([bytes],{type:'text/csv;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download=`draftdesk-${savedView?'v'+revision:'unsaved-preview'}.csv`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+  message(`CSV export requested for ${savedView?'saved revision '+revision:'this unsaved preview'}; all ${result.rows.length} rows are included.`);
+});
+$('remove').addEventListener('click',()=>ask('Remove this saved draft?', 'This deletes all revisions of this draft from this browser. Export any results you want to keep first.',async()=>{
+  const id=activeId;const remove=()=>{const live=readStore().filter(d=>d.id!==id);localStorage.setItem(KEY,JSON.stringify(live));drafts=live;reset();message('Draft removed from this browser.');};
+  try{if(navigator.locks)await navigator.locks.request('draftdesk-preview-save',remove);else remove();}catch(e){message(e.message,true);}
+}));
+window.addEventListener('storage',e=>{if(e.key!==KEY)return;try{const latest=readStore();const currentRemote=latest.find(d=>d.id===activeId);if(activeId&&currentRemote?.revisions.at(-1)?.number!==drafts.find(d=>d.id===activeId)?.revisions.at(-1)?.number)message('This draft changed in another tab. Reopen it before saving further revisions.',true);drafts=latest;list();}catch(e){message(e.message,true);}});
+window.addEventListener('beforeunload',e=>{if(unsaved()){e.preventDefault();e.returnValue='';}});
+list();refreshButtons();
+</script></head>
+<body>
+<header><a class="brand" href="#"><span class="mark">d.</span>draftdesk<span class="tag">WORKSPACE</span></a><div class="header-right"><span class="local-dot"></span><span>Runs in your browser</span><a href="https://github.com/menwo535-jpg/rfq-quote-pilot" target="_blank" rel="noopener">Source &amp; backend ↗</a></div></header>
+<div class="layout"><aside><p class="overline">YOUR WORKSPACE</p><h2>Quotation drafts</h2><button id="new" class="secondary full">＋ New draft</button><div id="draft-list" class="draft-list"></div><p class="aside-bottom">Independent working demo<br><span>Local browser storage · no cloud sync</span></p></aside>
+<main>
+<div class="hero"><div><p class="overline">OPERATIONS / QUOTATIONS</p><h1>From source files.<br>To a quote you can check.</h1><p class="intro">Match product requests to your approved price list.<br>Keep exceptions visible, every revision intact.</p></div><div class="hero-index"><span>01</span><p>IMPORT<br>REVIEW<br>EXPORT</p></div></div>
+<div class="demo-note"><span class="demo-label">TRY THE WORKFLOW</span><p>Start with the sample, inspect the four exceptions, then load corrected inputs to save a new revision.</p><button id="sample" class="text-button">Load sample ↗</button></div>
+<div id="notice" class="notice" role="status" aria-live="polite">Ready. Import two CSV files or try the supplied sample.</div>
+<section class="card"><div class="section-heading"><div><p class="overline">01 / SOURCE INPUT</p><h2>Build a quotation draft</h2></div><button id="corrected" class="text-button">Load corrected sample</button></div>
+<div class="project-row"><label for="name">Draft name<input id="name" maxlength="100" placeholder="e.g. North warehouse · September replenishment"></label><label for="note">Revision note <span class="optional">optional</span><input id="note" maxlength="200" placeholder="e.g. Confirmed units with supplier"></label></div>
+<div class="file-grid"><div><label for="request-file">Product request <span>CSV</span></label><input id="request-file" type="file" accept=".csv,text/csv"><details open><summary>View or edit request data</summary><label class="sr-only" for="request-text">Request CSV data</label><textarea id="request-text" rows="7" spellcheck="false" placeholder="code,description,quantity,unit"></textarea></details><p class="hint">Required: code, description, quantity, unit</p></div><div><label for="catalogue-file">Approved price list <span>CSV</span></label><input id="catalogue-file" type="file" accept=".csv,text/csv"><details open><summary>View or edit catalogue data</summary><label class="sr-only" for="catalogue-text">Catalogue CSV data</label><textarea id="catalogue-text" rows="7" spellcheck="false" placeholder="code,description,unit,unit_price,currency,price_version"></textarea></details><p class="hint">Required: code, description, unit, unit_price, currency, price_version</p></div></div>
+<div class="input-actions"><p>Up to 1,000 rows per file. Prices and units are never guessed.</p><button id="compare">Compare files <span>→</span></button></div></section>
+<section id="review" hidden><div class="review-title"><div><p class="overline">02 / REVIEW &amp; RESOLVE</p><h2 id="review-title">Draft review</h2><p id="review-meta" class="hint"></p></div><span id="version" class="pill">Unsaved preview</span></div>
+<div class="metrics"><div><span>REQUEST LINES</span><strong id="count">0</strong></div><div><span>NEEDS REVIEW</span><strong id="exceptions">0</strong></div><div class="total"><span id="total-label">MATCHED SUBTOTAL</span><strong id="amount">—</strong><p id="total-note"></p></div></div>
+<div class="card"><div class="table-controls"><div class="filter-tabs" role="group" aria-label="Filter rows"><button id="filter-all" aria-pressed="true">All lines</button><button id="filter-review" aria-pressed="false">Needs review</button></div><label class="search"><span class="sr-only">Search products</span><input id="search" type="search" placeholder="Search code or description"></label></div><div class="table-scroll" tabindex="0" role="region" aria-label="Quotation line items"><table><thead><tr><th>PRODUCT / DESCRIPTION</th><th>QUANTITY</th><th>UNIT PRICE</th><th>LINE TOTAL</th><th>CHECK RESULT</th></tr></thead><tbody id="rows"></tbody></table></div><p id="empty" class="empty" hidden>No lines match this filter.</p><div class="review-actions"><p id="export-note">Exports include all rows in this version, including exceptions.</p><div><button id="export" class="secondary">Export CSV ↓</button><button id="save">Save revision</button></div></div></div>
+<div class="history"><label for="history">Revision history</label><select id="history" disabled><option>No saved revisions</option></select><p id="history-note">Save this draft to keep a snapshot on this browser.</p></div></section>
+<section class="scope"><div><h3>A complete small workflow</h3><p>File validation, exact decimal totals, exception review, immutable revisions and version-specific exports.</p></div><div><h3>Where the data lives</h3><p>Files are processed here. Saved inputs stay in this browser until you remove the draft. This preview has no shared accounts or server storage.</p></div><div><h3>Need PDF or a shared workflow?</h3><p>The linked Python/SQLite sample handles an agreed text-PDF format. Team permissions, new formats and hosting are separate project scopes.</p></div></section>
+<footer><p>Drafts need human approval. No automatic approval, sending, taxes or currency conversion.</p><button id="remove" class="text-button" hidden>Remove this draft</button><a href="mailto:menwo535@gmail.com?subject=Web%20app%20project%20enquiry">Discuss a workflow ↗</a></footer>
+</main></div>
+<dialog id="confirm"><h2 id="confirm-title">Discard unsaved changes?</h2><p id="confirm-text"></p><div class="dialog-actions"><button id="cancel" class="secondary">Keep working</button><button id="confirm-action">Continue</button></div></dialog>
+</body></html>
