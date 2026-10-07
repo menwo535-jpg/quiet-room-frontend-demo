@@ -1,0 +1,187 @@
+<!doctype html><html lang="en" translate="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Workflow Checkbook · Menwo</title><style>:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172622;background:#f4f5ee;font-synthesis:none}*{box-sizing:border-box}body{margin:0}header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ced5c9;padding:20px 4vw}.brand{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit;font-size:18px;font-weight:750}.mark{background:#193e32;color:#e2edbd;padding:7px 10px;border-radius:7px}.tag,.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.5px}.tag{color:#667168}main{max-width:1320px;margin:auto;padding:0 4vw}.hero{padding:54px 0 30px;position:relative;max-width:800px}.eyebrow{color:#3c614c}h1{font-size:clamp(36px,5vw,65px);line-height:1.05;letter-spacing:-2.7px;margin:17px 0}h2{font-size:18px;margin:0}h3{font-size:14px}.intro{font-size:18px;line-height:1.65;max-width:640px;color:#59625a}.sample-note{display:inline-block;font-size:12px;padding:7px 12px;border:1px solid #cad3c0;border-radius:99px}.controls{display:flex;align-items:flex-end;gap:10px;border-top:1px solid #c7d0c3;padding-top:23px;flex-wrap:wrap}.controls label{display:block;font-size:12px;margin-bottom:7px;font-weight:650}.controls>div{flex:1;min-width:260px;max-width:450px}select,button{font:inherit;font-size:13px;border:1px solid #bfcab8;border-radius:7px;min-height:44px;padding:11px 16px;background:#fff;color:inherit}select{width:100%}button{cursor:pointer;font-weight:650}button:hover:enabled{background:#e4ebdc}button:disabled{opacity:.5;cursor:default}.primary{background:#193e32;color:#fff;border-color:#193e32;min-width:170px;display:flex;justify-content:space-between;gap:20px}.primary:hover:enabled{background:#2d5948}button:focus-visible,select:focus-visible{outline:3px solid #a0bd59;outline-offset:3px}#status{font-size:12px;color:#657060;min-height:20px}.metrics{display:grid;grid-template-columns:1fr 1fr 1.5fr;border:1px solid #c9d2c1;border-radius:10px;margin:20px 0 32px;overflow:hidden;background:#fafbf6}.metrics article{padding:22px 24px;border-right:1px solid #c9d2c1;display:flex;flex-direction:column;gap:6px}.metrics article:last-child{border:0}.metrics article>div{font-size:10px;letter-spacing:1.1px;color:#62715f}.metrics strong{font-size:39px;letter-spacing:-1px}.metrics strong small{font-size:18px;font-weight:400;color:#7a8477;margin-left:5px}.metrics .small-metric{font-size:23px;letter-spacing:-.5px;margin-top:7px}.metrics span{font-size:11px;color:#6f786b}.workspace{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:start}.section-heading{display:flex;gap:15px;justify-content:space-between;align-items:center;margin-bottom:16px}.section-heading>span{font-size:11px;text-align:right;color:#6a7769}.case-list{display:grid;gap:6px}.case{width:100%;display:grid;grid-template-columns:36px 1fr 50px;align-items:center;gap:7px;text-align:left;padding:14px 12px;background:#fafbf6;border-color:#d0d8c8}.case[aria-pressed="true"]{box-shadow:inset 3px 0 #204c39;border-color:#709d79;background:#e9efde}.case>span:first-child{font:11px ui-monospace,monospace;color:#798273}.case strong{font-size:12px}.badge{font-size:10px;font-weight:750;border-radius:4px;text-align:center;padding:4px;background:#e3eddd;color:#245330}.badge.failed{background:#f3e2d6;color:#983e20}aside{background:#172f27;color:#edf2e6;border-radius:10px;padding:25px;min-height:420px}.detail-empty{padding:50px 5px}.detail-empty>span{font:38px ui-monospace,monospace;color:#b7d382}.detail-empty h2{font-size:26px;margin:26px 0 10px}.detail-empty p,aside .why{font-size:13px;line-height:1.65;color:#bdcbb8}.detail-title{display:flex;justify-content:space-between;align-items:center;gap:16px}.detail-title span{font-size:11px;color:#bdd792}.detail-title h2{font-size:21px}.step{margin-top:24px;border-top:1px solid #405447;padding-top:15px}.step h3{display:flex;justify-content:space-between;align-items:center;margin:0 0 12px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:10px}.comparison>div{min-width:0}.caption{font-size:10px;letter-spacing:.5px;color:#b4cfa0}pre{font:11px/1.65 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#0e211b;border:1px solid #314b3c;border-radius:6px;padding:11px;color:#d9e3d1;margin:7px 0 13px}.diff{font-size:12px;line-height:1.6;background:#4c3027;padding:10px;color:#f5d2bd;border-radius:5px;overflow-wrap:anywhere}.trace{margin:12px 0 0;padding-left:20px;color:#bfcfb7;font:11px/1.8 ui-monospace,monospace}.trace li{padding:3px 0;overflow-wrap:anywhere}.empty{background:#edf0e5;border:1px dashed #bbc7ad;border-radius:8px;padding:30px;font-size:13px;line-height:1.8}.limits{margin:36px 0;padding:25px;border:1px solid #c9d2c1;border-radius:10px;max-width:900px}.limits p{font-size:13px;line-height:1.8;color:#63715f}.limits h3{margin-top:22px}footer{padding:22px 0 32px;border-top:1px solid #ccd4c3;display:flex;justify-content:space-between;gap:12px;color:#718068;font-size:11px}@media(max-width:760px){header{padding:15px 5vw}.tag{display:none}main{padding:0 5vw}.hero{padding-top:35px}h1{letter-spacing:-1.6px}.intro{font-size:16px}.controls>div{max-width:none;min-width:100%}.controls button{flex:1;padding:10px}.primary{min-width:100%}.metrics{grid-template-columns:1fr 1fr}.metrics article{padding:16px}.metrics article:nth-child(2){border:0}.metrics article:last-child{grid-column:1/-1;border-top:1px solid #c9d2c1}.metrics strong{font-size:32px}.workspace{grid-template-columns:1fr}aside{padding:19px;min-height:300px}.case{grid-template-columns:30px 1fr 47px}.section-heading{align-items:start}.limits{padding:19px}footer{flex-direction:column}}
+</style></head><body>
+<header><a href="#" class="brand"><span class="mark">W</span> Workflow Checkbook</a><span class="tag">INDEPENDENT LAB / 01</span></header>
+<main><section class="hero"><div class="eyebrow">SMALL WORKFLOWS. INSPECTABLE EVIDENCE.</div><h1>A green response<br>is only half the story.</h1><p class="intro">Replay twelve order-intake cases. Check what the caller receives <em>and</em> what the workflow actually creates.</p><div class="sample-note">Synthetic demo · no client data · no external calls</div></section>
+<section class="controls" aria-label="Test controls"><div><label for="mode">Workflow fixture</label><select id="mode"><option value="defective">Before: deliberately defective</option><option value="corrected">After: corrected reference</option></select></div><button id="run" class="primary">Run 12 cases <span>↗</span></button><button id="download" disabled>Export JSON</button><button id="csv" disabled>Export CSV</button></section>
+<p id="status" role="status" aria-live="polite">Ready. Every run starts with fresh fixture state.</p>
+<section class="metrics" aria-label="Run summary"><article><div>CASES PASSED</div><strong id="pass">—<small>/12</small></strong></article><article><div>CASES FAILED</div><strong id="fail">—</strong></article><article><div>DESTINATION</div><strong class="small-metric">Local fixture</strong><span>Sequential execution, no load test</span></article></section>
+<section class="workspace"><div><div class="section-heading"><h2>Case register</h2><span id="run-mode">Choose a fixture to begin</span></div><div id="cases" class="case-list"><div class="empty">Run the suite to see expected results, observed responses and the corresponding effect trace.</div></div></div><aside id="detail" aria-label="Selected case"><div class="detail-empty"><span>01 → 12</span><h2>Evidence, one case at a time.</h2><p>Select a result to inspect its inputs, comparisons and ordered trace. A pass requires all of its steps to match.</p></div></aside></section>
+<section class="limits"><h2>What this demonstrates</h2><p>The same assertions detect planted defects and pass the corrected reference. Inputs, response fields and side-effect counts remain visible in the exported report.</p><h3>What it does not establish</h3><p>This is an independent JavaScript fixture, not a test of n8n, Vapi, Twilio, ElevenLabs or a customer's agent. It does not assess voice quality or model behavior. State is in memory; concurrent requests and recovery after a process restart are outside this example. The timeout is injected <strong>before</strong> a destination write. An unknown outcome after a write requires reconciliation and is not covered.</p></section>
+<footer>Menwo / Xiaolong Pan <span>Source and checks included. AI-assisted implementation.</span></footer></main><script type="module">// Independent order-intake fixture. It never contacts an external service.
+const clone = value => structuredClone(value);
+const sampleOrder = () => ({ eventId: 'evt-demo-01', items: [{ sku: 'DEMO-A', quantity: 2 }] });
+const result = (status, outcome, extra = {}) => ({ status, body: { outcome, ...extra } });
+
+function normalize(payload) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return null;
+  if (typeof payload.eventId !== 'string' || !payload.eventId.trim()) return null;
+  if (!Array.isArray(payload.items) || payload.items.length === 0 || payload.items.length > 100) return null;
+  const items = [];
+  for (const item of payload.items) {
+    if (!item || typeof item.sku !== 'string' || !item.sku.trim() ||
+        !Number.isSafeInteger(item.quantity) || item.quantity < 1 || item.quantity > 10000) return null;
+    items.push({ sku: item.sku.trim(), quantity: item.quantity });
+  }
+  return { eventId: payload.eventId.trim(), items };
+}
+
+function createFixture(mode = 'corrected') {
+  if (!['corrected', 'defective'].includes(mode)) throw new Error('Unknown fixture mode');
+  const completed = new Map();
+  const effects = [];
+  const trace = [];
+  const log = (step, detail) => trace.push({ sequence: trace.length + 1, step, detail });
+  function downstream(behavior, order) {
+    log('downstream_attempt', { behavior });
+    if (behavior === 'timeout') { log('downstream_timeout', {}); return { timeout: true }; }
+    if (behavior === 'rate_limit') return { status: 429, body: { accepted: false }, retryAfter: 1 };
+    if (behavior === 'unavailable') return { status: 503, body: { accepted: false } };
+    if (behavior === 'declined') return { status: 200, body: { accepted: false, reason: 'fixture_decline' } };
+    const effect = { orderId: `order-${effects.length + 1}`, eventId: order.eventId, items: clone(order.items) };
+    effects.push(effect);
+    log('order_created', effect);
+    return { status: 200, body: { accepted: true, orderId: effect.orderId } };
+  }
+  async function receive(payload, behavior = 'success') {
+    if (!['success', 'timeout', 'rate_limit', 'unavailable', 'declined'].includes(behavior)) throw new Error('Unknown fixture behavior');
+    log('request_received', clone(payload));
+    if (mode === 'defective') {
+      // Three deliberate defects: incomplete validation, no replay tracking,
+      // and converting every downstream response/failure into success.
+      if (!payload || !Array.isArray(payload.items)) return result(400, 'invalid');
+      const response = downstream(behavior, payload);
+      log('responded', { status: 200, outcome: 'confirmed' });
+      return result(200, 'confirmed', { orderId: response.body?.orderId ?? null });
+    }
+    const order = normalize(payload);
+    if (!order) { log('validation_rejected', {}); return result(400, 'invalid'); }
+    const fingerprint = JSON.stringify(order.items);
+    const existing = completed.get(order.eventId);
+    if (existing) {
+      if (existing.fingerprint !== fingerprint) {
+        log('event_conflict', {});
+        return result(409, 'conflict');
+      }
+      log('replay_returned', { orderId: existing.orderId });
+      return result(200, 'confirmed', { orderId: existing.orderId, replay: true });
+    }
+    const response = downstream(behavior, order);
+    if (response.timeout) return result(504, 'retryable_failure');
+    if (response.status === 429) return result(429, 'deferred', { retryAfter: response.retryAfter });
+    if (response.status >= 500) return result(502, 'retryable_failure');
+    if (response.status !== 200 || response.body.accepted !== true) return result(422, 'declined');
+    completed.set(order.eventId, { fingerprint, orderId: response.body.orderId });
+    log('completion_recorded', { eventId: order.eventId });
+    return result(200, 'confirmed', { orderId: response.body.orderId, replay: false });
+  }
+  return { receive, snapshot: () => ({ effects: clone(effects), trace: clone(trace), completedEvents: completed.size }) };
+}
+
+const step = (payload, status, outcome, effects, behavior = 'success', extra = {}) =>
+  ({ payload, behavior, expect: { status, outcome, effects, ...extra } });
+function scenarios() {
+  const order = sampleOrder;
+  return [
+    { id: 'C01', name: 'Valid event', category: 'Happy path', why: 'A valid order creates exactly one downstream record.', steps: [step(order(), 200, 'confirmed', 1)] },
+    { id: 'C02', name: 'Missing event ID', category: 'Validation', why: 'A request without a stable event ID must stop before a downstream write.', steps: [step({ items: order().items }, 400, 'invalid', 0)] },
+    { id: 'C03', name: 'Empty item list', category: 'Validation', why: 'An empty order should not be treated as a completed order.', steps: [step({ ...order(), items: [] }, 400, 'invalid', 0)] },
+    { id: 'C04', name: 'Fractional quantity', category: 'Validation', why: 'The agreed fixture contract allows whole units only.', steps: [step({ ...order(), items: [{ sku: 'DEMO-A', quantity: 1.5 }] }, 400, 'invalid', 0)] },
+    { id: 'C05', name: 'Zero quantity', category: 'Validation', why: 'A non-positive quantity is rejected before calling the destination.', steps: [step({ ...order(), items: [{ sku: 'DEMO-A', quantity: 0 }] }, 400, 'invalid', 0)] },
+    { id: 'C06', name: 'Same event delivered twice', category: 'Replay', why: 'A retry returns the prior outcome and does not create a second order.', steps: [step(order(), 200, 'confirmed', 1), step(order(), 200, 'confirmed', 1, 'success', { replay: true })] },
+    { id: 'C07', name: 'Same ID, changed payload', category: 'Replay', why: 'Reusing an ID for different content must surface a conflict.', steps: [step(order(), 200, 'confirmed', 1), step({ ...order(), items: [{ sku: 'DEMO-A', quantity: 3 }] }, 409, 'conflict', 1)] },
+    { id: 'C08', name: 'Destination timeout', category: 'Failure handling', why: 'A known pre-write timeout is a retryable failure, not confirmation.', steps: [step(order(), 504, 'retryable_failure', 0, 'timeout')] },
+    { id: 'C09', name: 'Retry after pre-write timeout', category: 'Failure handling', why: 'A failed attempt must not consume the event and block its safe retry.', steps: [step(order(), 504, 'retryable_failure', 0, 'timeout'), step(order(), 200, 'confirmed', 1)] },
+    { id: 'C10', name: 'Destination rate limit', category: 'Failure handling', why: 'Expose the retry signal without inventing a successful order.', steps: [step(order(), 429, 'deferred', 0, 'rate_limit', { retryAfter: 1 })] },
+    { id: 'C11', name: 'Destination unavailable', category: 'Failure handling', why: 'A destination failure must reach the caller or its agreed fallback.', steps: [step(order(), 502, 'retryable_failure', 0, 'unavailable')] },
+    { id: 'C12', name: 'HTTP 200, business declined', category: 'Business outcome', why: 'Transport success alone does not prove the order was accepted.', steps: [step(order(), 422, 'declined', 0, 'declined')] },
+  ];
+}
+
+function compareStep(expected, response, snapshot) {
+  const actual = { status: response.status, outcome: response.body?.outcome, effects: snapshot.effects.length };
+  for (const key of ['replay', 'retryAfter']) if (key in expected) actual[key] = response.body?.[key];
+  const differences = Object.entries(expected).filter(([key, value]) => actual[key] !== value)
+    .map(([field, wanted]) => ({ field, expected: wanted, actual: actual[field] ?? null }));
+  return { actual, differences, passed: differences.length === 0 };
+}
+
+async function runSuite(mode, adapterFactory = createFixture) {
+  const startedAt = new Date().toISOString();
+  const cases = [];
+  for (const scenario of scenarios()) {
+    const fixture = await adapterFactory(mode);
+    const observations = [];
+    for (const instruction of scenario.steps) {
+      const response = await fixture.receive(clone(instruction.payload), instruction.behavior);
+      const snapshot = await fixture.snapshot();
+      observations.push({ input: clone(instruction.payload), behavior: instruction.behavior,
+        expected: instruction.expect, response, ...compareStep(instruction.expect, response, snapshot), trace: snapshot.trace });
+    }
+    cases.push({ ...scenario, passed: observations.every(x => x.passed), observations });
+  }
+  return { schemaVersion: 1, sample: 'Workflow Checkbook', mode, startedAt, finishedAt: new Date().toISOString(),
+    provenance: 'Independent synthetic order-intake fixture. No client workflow, n8n runtime, voice platform or external service tested.',
+    limits: ['Sequential, in-memory fixture only; no concurrent delivery or restart durability claim.',
+      'Timeout is injected before any destination write; an unknown post-write outcome needs reconciliation and is not covered.',
+      'No voice quality, live calls, production load, or LLM behavior tested.'],
+    passed: cases.filter(x => x.passed).length, total: cases.length, cases };
+}
+
+
+const $ = id => document.getElementById(id);
+const make = (tag, text, className) => { const node = document.createElement(tag); node.textContent = text ?? ''; if (className) node.className = className; return node; };
+let report;
+let selected = null;
+function showCase(id) {
+  selected = id;
+  for (const item of $('cases').children) item.setAttribute('aria-pressed', String(item.dataset.case === id));
+  const current = report.cases.find(x => x.id === id);
+  $('detail').replaceChildren();
+  const title = make('div', '', 'detail-title'); title.append(make('h2',current.name),make('span',current.id));
+  $('detail').append(title,make('p',current.why,'why'));
+  current.observations.forEach((observation, index) => {
+    const block = make('div','','step'); const heading = make('h3',`Step ${index+1} · ${observation.behavior}`);
+    heading.append(make('span',observation.passed?'PASS':'FAIL',`badge ${observation.passed?'':'failed'}`));block.append(heading);
+    const comparison = make('div','','comparison');
+    for (const [label,value] of [['EXPECTED',observation.expected],['OBSERVED',observation.actual]]) {
+      const col = make('div');col.append(make('span',label,'caption'),make('pre',JSON.stringify(value,null,2)));comparison.append(col);
+    }
+    block.append(comparison);
+    if (observation.differences.length) block.append(make('p',observation.differences.map(x=>`${x.field}: expected ${JSON.stringify(x.expected)}, observed ${JSON.stringify(x.actual)}`).join('\n'),'diff'));
+    const input = document.createElement('details');input.append(make('summary','Input and full response'),make('pre',JSON.stringify({input:observation.input,response:observation.response},null,2)));block.append(input);
+    block.append(make('div','ORDERED TRACE THROUGH THIS STEP','caption'));
+    const trace = make('ol','','trace');
+    for (const event of observation.trace) trace.append(make('li',`${event.step} ${JSON.stringify(event.detail)}`));
+    block.append(trace);$('detail').append(block);
+  });
+}
+async function run() {
+  $('run').disabled = true; $('download').disabled = true; $('csv').disabled = true;
+  $('status').textContent = 'Running twelve local fixture cases…';
+  try {
+    report = await runSuite($('mode').value);
+    $('pass').replaceChildren(document.createTextNode(String(report.passed)),make('small',`/${report.total}`));
+    $('fail').textContent = String(report.total-report.passed);
+    $('run-mode').textContent = report.mode==='corrected'?'Corrected reference':'Deliberately defective';
+    $('cases').replaceChildren();
+    for (const entry of report.cases) {
+      const button = make('button','','case');button.dataset.case=entry.id;button.setAttribute('aria-pressed','false');
+      button.append(make('span',entry.id),make('strong',entry.name),make('span',entry.passed?'PASS':'FAIL',`badge ${entry.passed?'':'failed'}`));
+      button.addEventListener('click',()=>showCase(entry.id));$('cases').append(button);
+    }
+    showCase(selected && report.cases.some(x=>x.id===selected)?selected:(report.cases.find(x=>!x.passed)?.id??'C01'));
+    $('status').textContent=`Completed ${new Date(report.finishedAt).toLocaleTimeString()}. ${report.passed}/${report.total} cases passed. Fixture state was reset between cases.`;
+    $('download').disabled=false;$('csv').disabled=false;
+  } catch(error) {$('status').textContent=`Run could not complete: ${error.message}`;}
+  finally {$('run').disabled=false;}
+}
+function download(contents,type,extension) {
+  const url = URL.createObjectURL(new Blob([contents],{type}));const link=document.createElement('a');
+  link.href=url;link.download=`workflow-checkbook-${report.mode}.${extension}`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+const cell = value => '"'+String(value??'').replaceAll('"','""')+'"';
+$('run').addEventListener('click',run);
+$('mode').addEventListener('change',()=>{$('status').textContent='Fixture selection changed. Run again to update the displayed results.';});
+$('download').addEventListener('click',()=>report&&download(JSON.stringify(report,null,2),'application/json','json'));
+$('csv').addEventListener('click',()=>{if(!report)return;const rows=[['fixture','case','name','step','passed','expected','observed','differences']];for(const entry of report.cases)entry.observations.forEach((o,i)=>rows.push([report.mode,entry.id,entry.name,i+1,o.passed,JSON.stringify(o.expected),JSON.stringify(o.actual),JSON.stringify(o.differences)]));download(rows.map(row=>row.map(cell).join(',')).join('\r\n'),'text/csv;charset=utf-8','csv');});
+</script></body></html>
