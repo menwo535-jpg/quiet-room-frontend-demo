@@ -21,7 +21,7 @@ The interface runs four deterministic sequences against the actual local HTTP se
 
 ## Verification
 
-15 Python tests pass, including all six orderings of running/two-success notifications, 16 concurrent duplicate events, 16 concurrent retry commands, conflicting event ids, input validation and HTTP restart/replay. The HTTP tests launch an ephemeral loopback server and temporary database, shut it down, restart against the same file and verify the recorded result/decision. Chrome runs all four visible scenarios through HTTP. These tests cover synthetic examples, not a provider integration or load benchmark.
+19 Python tests pass, including all six orderings of running/two-success notifications, 16 concurrent duplicate events, 16 concurrent retry commands, conflicting event ids, input validation and HTTP restart/replay. Chinese and emoji results survive persistence and HTTP round trips; unpaired Unicode surrogates and excessively nested JSON return readable 400 errors without changing the job. The HTTP tests launch an ephemeral loopback server and temporary database, shut it down, restart against the same file and verify the recorded result/decision. Chrome previously ran all four visible scenarios through HTTP; the input-validation updates were verified by the automated HTTP tests. These tests cover synthetic examples, not a provider integration or load benchmark.
 
 ## Scope limits
 
