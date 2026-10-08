@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="An independent directory interface demonstration with fictional providers and local saved lists.">
+  <title>Neighbour — Directory demo</title>
+  <style>
+:root{--ink:#183c36;--muted:#65746d;--paper:#f8f9f5;--green:#245b4b;--line:#dce4dc;--sage:#e4eddf;--peach:#f7e4d9;--blue:#e2ecf2;--lavender:#eae4f3;--focus:#186cba}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font-family:Inter,"Segoe UI",Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button{cursor:pointer}a{color:inherit}button:disabled{cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:4px}button{color:var(--ink)}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link{position:fixed;top:8px;left:8px;padding:12px;background:#fff;z-index:10;transform:translateY(-160%)}.skip-link:focus{transform:none}.site-header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{max-width:1180px;margin:auto;min-height:84px;padding:16px 36px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;gap:11px;align-items:center;font-size:25px;font-weight:750;letter-spacing:-1px;text-decoration:none}.brand-mark{display:grid;place-items:center;border-radius:13px;background:var(--green);color:#fff;width:38px;height:38px;font-family:Georgia,serif;font-size:31px;font-weight:400;line-height:1;padding-bottom:7px}.brand-dot{color:#809676}.saved-nav{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:100px;padding:9px 15px;min-height:44px;font-weight:600;font-size:14px}.saved-nav>span:first-child{font-size:23px;line-height:1}.saved-nav[aria-pressed=true]{background:var(--green);color:#fff;border-color:var(--green)}.saved-count{border-radius:50%;min-width:23px;height:23px;display:grid;place-items:center;background:#eef2ea;font-size:12px;color:var(--ink)}main{max-width:1180px;padding:0 36px;margin:auto}main:focus{outline:none}.intro{display:flex;align-items:center;justify-content:space-between;padding:46px 0 32px;gap:30px}.intro-copy{flex:1}.eyebrow{font-size:10px;font-weight:750;letter-spacing:1.55px;display:flex;align-items:center;gap:8px;margin:0 0 15px}.eyebrow-dot{width:6px;height:6px;flex:0 0 auto;border-radius:50%;background:#8d9d76}.demo-tag{display:inline-flex;align-items:center;border:1px solid #c5d2c3;border-radius:5px;color:#506650;padding:2px 6px;font-size:10px;font-weight:650;letter-spacing:.15px;white-space:nowrap}.eyebrow .demo-tag{margin-left:3px}h1{font-size:clamp(36px,4.4vw,53px);font-weight:650;letter-spacing:-2px;line-height:1.09;margin:0 0 17px}h1 span{color:#628366}.intro-text{color:var(--muted);font-size:15px;line-height:1.7;margin:0}.intro-art{width:280px;max-width:28%;position:relative;padding-bottom:12px}.intro-art svg{display:block;width:100%;height:auto}.art-blob{fill:#ebefdf}.art-path{fill:none;stroke:#b8c7ad;stroke-width:2;stroke-dasharray:5 7}.art-circle{fill:#fff;stroke:#d3decf}.art-house{fill:none;stroke:#6d8c75;stroke-width:2;stroke-linejoin:round}.art-pin{fill:#3d7059;transform:rotate(9deg);transform-origin:201px 100px}.art-hole{fill:#e9efdd;transform:rotate(9deg);transform-origin:201px 100px}.art-leaf{fill:#dcaa8d}.art-spark{fill:#b6c7a4}.art-label{display:block;text-align:center;font-family:Georgia,serif;font-size:15px;font-style:italic;color:#5e6f61;margin-top:-5px}.filter-panel{border:1px solid var(--line);background:#fff;border-radius:16px;padding:18px 21px;display:grid;grid-template-columns:1.45fr 1fr 1fr;gap:22px;box-shadow:0 4px 15px #1c382904}.field-label{display:block;font-size:11px;letter-spacing:.25px;font-weight:700;margin-bottom:7px;color:#69766b}.search-field{min-width:0}.input-wrap{display:flex;align-items:center;gap:10px}.input-wrap svg{width:21px;height:21px;stroke:#809184;fill:none;stroke-width:1.8;flex-shrink:0}input,select{width:100%;min-width:0;border:0;background:#fff;color:var(--ink);font-size:14px;border-radius:4px;min-height:35px}input::placeholder{color:#5e6f61;opacity:1}input{padding:4px 0}select{padding:4px 23px 4px 0}.select-field{border-left:1px solid var(--line);padding-left:22px;min-width:0}.results-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:34px 0 12px}.section-kicker{font-size:9px;letter-spacing:1.45px;color:#5e6f61;font-weight:750;margin:0 0 6px}h2{font-size:22px;letter-spacing:-.65px;line-height:1.25;margin:0;font-weight:650}.text-button{border:0;background:none;text-decoration:underline;text-underline-offset:4px;padding:10px 0;font-size:12px;white-space:nowrap}.text-button span{padding-left:5px}.results-meta{display:flex;gap:10px;justify-content:space-between;align-items:center;color:#5e6f61;font-size:12px;margin-bottom:18px}.results-meta p{margin:0}.sample-note{font-size:11px}.sample-note span{font-size:16px;margin-right:3px}.provider-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.provider-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:21px;display:flex;flex-direction:column;min-width:0;position:relative;transition:border-color .15s,box-shadow .15s}.provider-card:hover{border-color:#a7bfa9;box-shadow:0 5px 14px #294c3510}.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:17px;gap:12px}.provider-avatar{width:53px;height:53px;flex-shrink:0;border-radius:15px;display:grid;place-items:center;font-family:Georgia,"Noto Serif CJK SC",serif;font-weight:500;font-size:23px;letter-spacing:-1px}.tone-sage{background:var(--sage);color:#536f4d}.tone-peach{background:var(--peach);color:#875237}.tone-blue{background:var(--blue);color:#406579}.tone-lavender{background:var(--lavender);color:#6d587f}.save-button{border:1px solid var(--line);background:#fff;width:37px;height:37px;min-width:37px;display:grid;place-items:center;border-radius:50%;font-size:25px;line-height:1}.save-button[aria-pressed=true]{color:var(--green);background:#edf4e8;border-color:#aac2a2}.category-label{font-size:10px;font-weight:700;color:#5e6f61;text-transform:uppercase;letter-spacing:.75px;margin:0 0 6px}.provider-name{font-size:17px;font-weight:650;letter-spacing:-.25px;line-height:1.3;margin:0 0 7px;overflow-wrap:anywhere}.provider-area{display:flex;align-items:center;gap:5px;color:#5e6f61;font-size:11px;margin:0 0 14px}.provider-area:before{content:'⌖';font-size:16px;line-height:1}.provider-summary{color:#69766e;font-size:12px;line-height:1.75;margin:0 0 16px;overflow-wrap:anywhere}.tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0 0 19px}.tags li{font-size:9px;color:#61735d;background:#f4f6ef;border:1px solid #e7ebe1;border-radius:5px;padding:4px 7px;overflow-wrap:anywhere;max-width:100%}.profile-button{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;border-top:1px solid #e8ede5;background:none;padding:15px 0 0;margin-top:auto;text-align:left;font-size:11px;font-weight:650;min-height:39px}.profile-button span{font-size:19px;line-height:1;color:#8a9d81}.notice{border:1px solid #e4c79b;background:#fff6e8;padding:12px 15px;color:#70532e;border-radius:10px;font-size:12px;margin-bottom:16px}.state-panel{grid-column:1/-1;border:1px dashed #bdcbb9;border-radius:16px;background:#f0f4eb;min-height:250px;padding:42px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}.state-symbol{font-size:34px;line-height:1;color:#6e8d69;margin:0 0 12px}.state-panel h3{margin:0 0 8px;font-size:21px;font-weight:650}.state-panel p{margin:0;color:#5e6f61;font-size:13px;max-width:390px;line-height:1.7}.primary-button{border:1px solid var(--green);border-radius:8px;background:var(--green);color:#fff;padding:11px 18px;min-height:44px;font-size:12px;font-weight:650;margin-top:20px}.spinner{width:28px;height:28px;border:3px solid #cfd9c5;border-top-color:var(--green);border-radius:50%;animation:spin 1.2s linear infinite;margin-bottom:18px}@keyframes spin{to{transform:rotate(360deg)}}.demo-footer{display:flex;gap:22px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin:34px 0 0;padding:25px 0 30px}.footer-brand{font-size:11px;color:#5b715e;font-weight:650}.demo-footer p{font-size:10px;color:#5e6f61;line-height:1.8;margin:5px 0 0}.scenario-label{min-width:168px;font-size:10px;color:#5e6f61}.scenario-label>span{display:block;margin-bottom:5px}.scenario-label select{border:1px solid var(--line);padding:8px 30px 8px 10px;font-size:11px;background:#fff;min-height:38px}dialog{border:1px solid var(--line);border-radius:20px;max-width:470px;width:calc(100% - 32px);padding:26px;color:var(--ink);box-shadow:0 20px 80px #19382940}dialog::backdrop{background:#173d3566;backdrop-filter:blur(2px)}.dialog-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.icon-button{background:none;border:1px solid var(--line);border-radius:50%;width:36px;height:36px;font-size:23px;line-height:1}.dialog-avatar{margin-bottom:18px}.dialog-title{font-size:26px;margin:0 0 8px;line-height:1.2}.dialog-summary{font-size:14px;color:var(--muted);line-height:1.7;margin:15px 0}.dialog-note{font-size:11px;color:#5e6f61;background:#f2f5ee;border-radius:8px;padding:12px;line-height:1.7;margin:20px 0 0}dialog>.primary-button{width:100%}
+@media(min-width:1450px){main,.header-inner{max-width:1250px}.intro{padding-top:52px}.provider-card{padding:24px}.provider-summary{font-size:13px}}
+@media(max-width:960px){.provider-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro-art{max-width:30%;width:235px}.filter-panel{gap:16px;padding:17px}.select-field{padding-left:16px}.intro-text{font-size:14px}}
+@media(max-width:600px){.header-inner{padding:15px 20px;min-height:73px}.brand{font-size:22px;gap:9px}.brand-mark{width:33px;height:33px;border-radius:11px;font-size:28px}.saved-nav{padding:8px 12px;font-size:12px;gap:6px;min-height:41px}main{padding:0 20px}.intro{padding:29px 0 24px;gap:0}.intro-art{display:none}.eyebrow{font-size:8px;letter-spacing:1.25px;gap:6px;margin-bottom:14px}.eyebrow .demo-tag{font-size:8px;padding:2px 5px;margin-left:1px}h1{font-size:40px;letter-spacing:-1.7px;margin-bottom:14px}.intro-text{font-size:13px;line-height:1.75}.filter-panel{grid-template-columns:1fr 1fr;padding:16px;gap:15px 13px;border-radius:13px}.search-field{grid-column:1/-1;border-bottom:1px solid var(--line);padding-bottom:12px}.select-field{border:0;padding:0}.select-field:last-child{border-left:1px solid var(--line);padding-left:13px}.field-label{font-size:9px;margin-bottom:4px}input,select{font-size:13px;min-height:34px}.results-heading{margin:28px 0 10px;align-items:flex-start}.section-kicker{font-size:8px;letter-spacing:1.2px}h2{font-size:20px;max-width:245px}.text-button{font-size:10px;white-space:normal;padding-top:16px;text-align:right;max-width:70px}.text-button span{display:none}.results-meta{font-size:10px;gap:5px;margin-bottom:14px}.sample-note{font-size:9px}.provider-grid{grid-template-columns:1fr;gap:13px}.provider-card{padding:20px}.card-top{margin-bottom:15px}.provider-avatar{width:49px;height:49px;font-size:22px}.provider-name{font-size:18px}.provider-summary{font-size:12px;line-height:1.75;margin-bottom:13px}.tags{margin-bottom:14px}.tags li{font-size:10px}.profile-button{font-size:12px}.demo-footer{flex-direction:column;align-items:stretch;gap:17px;margin-top:28px;padding-top:22px}.scenario-label{max-width:240px}.demo-footer p{font-size:10px}.state-panel{padding:36px 20px;min-height:260px}.state-panel h3{font-size:19px}dialog{padding:22px}.wide-only{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.save-button,.icon-button{min-width:44px;min-height:44px}.profile-button{min-height:44px}.scenario-label select{min-height:44px}
+@media(max-width:600px){.saved-nav{min-height:44px}input,select{font-size:16px;min-height:38px}.provider-summary{font-size:13px}}
+@media(max-width:420px){.filter-panel{grid-template-columns:1fr;gap:12px}.select-field:last-child{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:10px}input,select{min-height:44px}}
+
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to directory</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#main" aria-label="Neighbour directory"><span class="brand-mark" aria-hidden="true">n.</span><span>neighbour<span class="brand-dot">.</span></span></a>
+      <button class="saved-nav" id="saved-toggle" type="button" aria-pressed="false"><span aria-hidden="true">♡</span> Saved <span class="saved-count" id="saved-count">0</span></button>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> YOUR LOCAL DIRECTORY <span class="demo-tag">Synthetic demo</span></p>
+        <h1 id="page-title">A little support.<br><span>A little closer.</span></h1>
+        <p class="intro-text">Explore services around your neighbourhood.<br class="wide-only"> Find your fit, and keep a few favourites.</p>
+      </div>
+      <div class="intro-art" aria-hidden="true">
+        <svg viewBox="0 0 280 210" focusable="false"><path class="art-blob" d="M58 150C18 99 43 46 98 28s142 7 149 69-35 88-86 87-68 10-103-34Z"/><path class="art-path" d="M46 153C81 164 91 87 134 94s43 45 99 8"/><circle class="art-circle" cx="84" cy="68" r="26"/><path class="art-house" d="m72 73 12-11 12 11v13H72Z"/><path class="art-pin" d="M201 52c-22 0-34 15-34 31 0 25 34 57 34 57s34-32 34-57c0-16-12-31-34-31Z"/><circle class="art-hole" cx="201" cy="83" r="11"/><path class="art-leaf" d="M82 151c-13-21-31-13-29 0s20 22 29 26c12-15 23-29 12-36-6-4-9 3-12 10Z"/><circle class="art-spark" cx="132" cy="40" r="4"/><circle class="art-spark" cx="149" cy="158" r="5"/></svg>
+        <span class="art-label">Good things, nearby.</span>
+      </div>
+    </section>
+
+    <section class="directory" aria-labelledby="directory-heading">
+      <div class="filter-panel">
+        <label class="search-field" for="search"><span class="field-label">What are you looking for?</span><span class="input-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><input id="search" type="search" placeholder="Search a name or specialty" maxlength="100" autocomplete="off"></span></label>
+        <label class="select-field" for="area"><span class="field-label">Neighbourhood</span><select id="area"><option value="">All areas</option></select></label>
+        <label class="select-field" for="category"><span class="field-label">Type of support</span><select id="category"><option value="">All categories</option></select></label>
+      </div>
+      <div class="results-heading">
+        <div><p class="section-kicker" id="section-kicker">EXPLORE THE DIRECTORY</p><h2 id="directory-heading">Find your next connection</h2></div>
+        <button type="button" class="text-button" id="reset-filters" hidden>Reset filters <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="results-meta"><p id="result-count">Preparing directory…</p><span class="sample-note"><span aria-hidden="true">◌</span> All listings are fictional</span></div>
+      <div class="notice" id="storage-notice" role="status" hidden></div>
+      <p id="announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="provider-grid" id="results" aria-busy="true"></div>
+      <noscript><div class="state-panel"><h3>JavaScript is needed for this demo</h3><p>Enable JavaScript to explore the fictional directory and saved-list interactions.</p></div></noscript>
+    </section>
+
+    <footer class="demo-footer">
+      <div><span class="footer-brand">Independent interface study</span><p>Synthetic names and services. No bookings or medical advice.<br>Saved items stay in this browser; no data is sent.</p></div>
+      <label class="scenario-label" for="scenario"><span>Preview a demo state</span><select id="scenario"><option value="ready">Ready</option><option value="loading">Loading</option><option value="empty">Empty directory</option><option value="invalid">Invalid data</option></select></label>
+    </footer>
+  </main>
+  <dialog id="profile-dialog" aria-labelledby="profile-title" aria-describedby="profile-summary">
+    <div class="dialog-header"><span class="demo-tag">Synthetic profile</span><button class="icon-button" id="close-dialog" type="button" aria-label="Close profile">×</button></div>
+    <div id="profile-content"></div>
+    <p class="dialog-note">This is an invented listing for a design demonstration. Contact details, booking and service availability are intentionally not provided.</p>
+    <button type="button" class="primary-button" id="profile-done">Back to directory</button>
+  </dialog>
+<script>
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.DirectoryCore = api;
+})(typeof globalThis === 'object' ? globalThis : this, function () {
+  'use strict';
+
+  const ID = /^[a-z0-9][a-z0-9-]{0,63}$/;
+  const ALLOWED_FIELDS = ['id', 'name', 'area', 'category', 'summary', 'tags', 'tone'];
+  const TONES = new Set(['sage', 'peach', 'blue', 'lavender']);
+
+  function wellFormed(value) {
+    for (let i = 0; i < value.length; i += 1) {
+      const code = value.charCodeAt(i);
+      if (code >= 0xd800 && code <= 0xdbff) {
+        const next = value.charCodeAt(i + 1);
+        if (!(next >= 0xdc00 && next <= 0xdfff)) return false;
+        i += 1;
+      } else if (code >= 0xdc00 && code <= 0xdfff) return false;
+    }
+    return true;
+  }
+
+  function text(value, field, max) {
+    if (typeof value !== 'string' || !wellFormed(value)) {
+      throw new TypeError(`${field} must be valid Unicode text.`);
+    }
+    const result = value.trim().normalize('NFC');
+    if (!result || Array.from(result).length > max || /[\u0000-\u001f\u007f]/.test(result)) {
+      throw new TypeError(`${field} is empty, too long, or contains control characters.`);
+    }
+    return result;
+  }
+
+  // An invalid batch fails together: duplicate identity must not save the wrong card.
+  function validateProviders(input) {
+    if (!Array.isArray(input) || input.length > 250) {
+      throw new TypeError('A directory must be an array of up to 250 entries.');
+    }
+    const seen = new Set();
+    return Array.from(input).map((item) => {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) {
+        throw new TypeError('Each directory entry must be an object.');
+      }
+      if (Object.keys(item).some((key) => !ALLOWED_FIELDS.includes(key))) {
+        throw new TypeError('A directory entry contains an unsupported field.');
+      }
+      if (typeof item.id !== 'string' || !ID.test(item.id) || seen.has(item.id)) {
+        throw new TypeError('Directory IDs must be valid and unique.');
+      }
+      seen.add(item.id);
+      if (!Array.isArray(item.tags) || item.tags.length > 4) {
+        throw new TypeError('Tags must be an array of up to four labels.');
+      }
+      if (!TONES.has(item.tone)) throw new TypeError('Unknown card tone.');
+      return Object.freeze({
+        id: item.id,
+        name: text(item.name, 'Name', 80),
+        area: text(item.area, 'Area', 50),
+        category: text(item.category, 'Category', 50),
+        summary: text(item.summary, 'Summary', 220),
+        tags: Object.freeze([...new Set(Array.from(item.tags).map((tag) => text(tag, 'Tag', 36)))]),
+        tone: item.tone,
+      });
+    });
+  }
+
+  function folded(value) {
+    return value.normalize('NFKD').replace(/\p{M}/gu, '').toLocaleLowerCase('en').trim().replace(/\s+/gu, ' ');
+  }
+
+  // Query tokens are ANDed; accents and case are ignored. Chinese and emoji stay intact.
+  function filterProviders(providers, filters = {}, savedIds = []) {
+    if (typeof filters.query === 'string' && !wellFormed(filters.query)) return [];
+    const query = typeof filters.query === 'string' ? filters.query : '';
+    const tokens = folded(query).split(' ').filter(Boolean);
+    const saved = new Set(savedIds);
+    return providers.filter((provider) => {
+      if (filters.area && provider.area !== filters.area) return false;
+      if (filters.category && provider.category !== filters.category) return false;
+      if (filters.savedOnly && !saved.has(provider.id)) return false;
+      const haystack = folded([provider.name, provider.area, provider.category, ...provider.tags].join(' '));
+      return tokens.every((token) => haystack.includes(token));
+    });
+  }
+
+  function facets(providers, field) {
+    if (field !== 'area' && field !== 'category') throw new TypeError('Unsupported filter.');
+    return [...new Set(providers.map((provider) => provider[field]))].sort((a, b) => a.localeCompare(b, 'en'));
+  }
+
+  function readSaved(raw, knownIds) {
+    if (raw === null || raw === undefined) return { ids: [], warning: false };
+    try {
+      if (typeof raw !== 'string' || raw.length > 20_000) throw new TypeError('Invalid saved list.');
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed) || parsed.length > 250 || parsed.some((id) => typeof id !== 'string' || !ID.test(id))) {
+        throw new TypeError('Invalid saved list.');
+      }
+      const known = new Set(knownIds);
+      return { ids: [...new Set(parsed)].filter((id) => known.has(id)), warning: false };
+    } catch (_) {
+      return { ids: [], warning: true };
+    }
+  }
+
+  function toggleSaved(ids, id, knownIds) {
+    if (!knownIds.includes(id)) throw new TypeError('Cannot save an unknown provider.');
+    const current = readSaved(JSON.stringify(ids), knownIds).ids;
+    return current.includes(id) ? current.filter((entry) => entry !== id) : [...current, id];
+  }
+
+  return Object.freeze({ validateProviders, filterProviders, facets, readSaved, toggleSaved, wellFormed });
+});
+
+</script>
+<script>
+// All names, areas and services below are invented demonstration content.
+(function (root, factory) {
+  const data = factory();
+  if (typeof module === 'object' && module.exports) module.exports = data;
+  else root.DirectorySample = data;
+})(typeof globalThis === 'object' ? globalThis : this, function () {
+  return [
+    { id: 'willow-studio', name: 'Willow Movement Studio', area: 'North Quarter', category: 'Movement', summary: 'A fictional neighbourhood studio for gentle movement and getting started at your own pace.', tags: ['Small groups', 'Step-free access'], tone: 'sage' },
+    { id: 'mosaic-circle', name: 'Mosaic Community Circle', area: 'East Bank', category: 'Community', summary: 'A sample place to discover local meetups, shared interests and a friendly conversation.', tags: ['Community groups', 'English / 中文'], tone: 'peach' },
+    { id: 'claro-language', name: 'Cláro Language Partners', area: 'Central', category: 'Language & learning', summary: 'An imaginary language-learning service with one-to-one practice and flexible sessions.', tags: ['One-to-one', 'English / Español'], tone: 'blue' },
+    { id: 'pocket-companion', name: 'Pocket Companion', area: 'West Garden', category: 'Everyday support', summary: 'A fictional support service for planning everyday errands and navigating local resources.', tags: ['Practical support', 'Flexible sessions'], tone: 'lavender' },
+    { id: 'morrow-workshop', name: 'Morrow Creative Workshop', area: 'Central', category: 'Community', summary: 'A sample creative space for making things, sharing skills and learning something new.', tags: ['Creative sessions', 'Small groups'], tone: 'peach' },
+    { id: 'qinghe-learning', name: '清禾 · Learning Corner', area: 'East Bank', category: 'Language & learning', summary: 'An invented learning corner featuring bilingual conversation and relaxed group activities.', tags: ['中文 / English', 'Beginner-friendly'], tone: 'sage' },
+    { id: 'open-path', name: 'Open Path Movement', area: 'West Garden', category: 'Movement', summary: 'A fictional movement programme with welcoming introductions and individual session options.', tags: ['One-to-one', 'Step-free access'], tone: 'blue' },
+    { id: 'sunroom-support', name: 'Sunroom Everyday Support', area: 'North Quarter', category: 'Everyday support', summary: 'An imaginary starting point for organising routines and finding useful community resources.', tags: ['Planning support', 'Flexible sessions'], tone: 'lavender' },
+  ];
+});
+
+</script>
+<script>
+(function () {
+  'use strict';
+  const Core = window.DirectoryCore;
+  const STORAGE_KEY = 'neighbour-directory-demo:saved:v1';
+  const byId = (id) => document.getElementById(id);
+  const search = byId('search');
+  const area = byId('area');
+  const category = byId('category');
+  const scenario = byId('scenario');
+  const results = byId('results');
+  const dialog = byId('profile-dialog');
+  const notice = byId('storage-notice');
+  let saved = [];
+  let savedOnly = false;
+  let providers = [];
+  let knownIds = [];
+  let dataError = false;
+  let storageWritable = true;
+
+  // Data is always inserted as text, never HTML, URLs, selectors or event attributes.
+  function element(tag, className, content) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (content !== undefined) node.textContent = content;
+    return node;
+  }
+
+  function showNotice(message) {
+    notice.textContent = message;
+    notice.hidden = !message;
+  }
+
+  try {
+    providers = Core.validateProviders(window.DirectorySample);
+    knownIds = providers.map((provider) => provider.id);
+  } catch (_) {
+    dataError = true;
+  }
+
+  function loadSaved() {
+    try {
+      const result = Core.readSaved(window.localStorage.getItem(STORAGE_KEY), knownIds);
+      saved = result.ids;
+      if (result.warning) showNotice('Your saved list could not be read. You can start a new list here.');
+    } catch (_) {
+      storageWritable = false;
+      showNotice('Browser storage is unavailable. Saved items will last for this page visit only.');
+    }
+  }
+  loadSaved();
+
+  function populate(select, field) {
+    for (const value of Core.facets(providers, field)) {
+      const option = element('option', '', value);
+      option.value = value;
+      select.append(option);
+    }
+  }
+  populate(area, 'area');
+  populate(category, 'category');
+
+  function avatar(provider) {
+    const letters = provider.name.split(/\s+/u).slice(0, 2).map((part) => Array.from(part)[0]).join('');
+    const node = element('span', `provider-avatar tone-${provider.tone}`, letters);
+    node.setAttribute('aria-hidden', 'true');
+    return node;
+  }
+
+  function tags(provider) {
+    const list = element('ul', 'tags');
+    list.setAttribute('aria-label', 'Listing features');
+    for (const tag of provider.tags) list.append(element('li', '', tag));
+    return list;
+  }
+
+  function openProfile(provider) {
+    const container = byId('profile-content');
+    container.replaceChildren();
+    const badge = avatar(provider);
+    badge.classList.add('dialog-avatar');
+    const title = element('h2', 'dialog-title', provider.name);
+    title.id = 'profile-title';
+    const summary = element('p', 'dialog-summary', provider.summary);
+    summary.id = 'profile-summary';
+    container.append(badge, element('p', 'category-label', provider.category), title, element('p', 'provider-area', provider.area), summary, tags(provider));
+    dialog.showModal();
+  }
+
+  function saveProvider(provider) {
+    saved = Core.toggleSaved(saved, provider.id, knownIds);
+    if (storageWritable) {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+        showNotice('');
+      } catch (_) {
+        storageWritable = false;
+        showNotice('This browser could not save your list. Changes will last for this page visit only.');
+      }
+    }
+    const nowSaved = saved.includes(provider.id);
+    render();
+    // Re-rendered cards otherwise remove keyboard focus, especially on unsave.
+    const replacement = Array.from(results.querySelectorAll('.save-button')).find((button) => button.dataset.providerId === provider.id);
+    if (replacement) replacement.focus();
+    else byId('saved-toggle').focus();
+    byId('announcer').textContent = `${provider.name} ${nowSaved ? 'saved' : 'removed from saved list'}. ${byId('result-count').textContent}`;
+  }
+
+  function card(provider) {
+    const article = element('article', 'provider-card');
+    const top = element('div', 'card-top');
+    const isSaved = saved.includes(provider.id);
+    const save = element('button', 'save-button', isSaved ? '♥' : '♡');
+    save.type = 'button';
+    save.dataset.providerId = provider.id;
+    save.setAttribute('aria-label', `${isSaved ? 'Remove' : 'Save'} ${provider.name}${isSaved ? ' from saved list' : ''}`);
+    save.setAttribute('aria-pressed', String(isSaved));
+    save.addEventListener('click', () => saveProvider(provider));
+    top.append(avatar(provider), save);
+    const view = element('button', 'profile-button', 'View profile');
+    view.type = 'button';
+    view.setAttribute('aria-label', `View profile: ${provider.name}`);
+    const arrow = element('span', '', '↗');
+    arrow.setAttribute('aria-hidden', 'true');
+    view.append(arrow);
+    view.addEventListener('click', () => openProfile(provider));
+    article.append(top, element('p', 'category-label', provider.category), element('h3', 'provider-name', provider.name), element('p', 'provider-area', provider.area), element('p', 'provider-summary', provider.summary), tags(provider), view);
+    return article;
+  }
+
+  function statePanel(title, body, actionLabel, action, loading = false) {
+    const panel = element('div', 'state-panel');
+    const symbol = element('span', loading ? 'spinner' : 'state-symbol', loading ? '' : '◌');
+    symbol.setAttribute('aria-hidden', 'true');
+    panel.append(symbol, element('h3', '', title), element('p', '', body));
+    if (action) {
+      const button = element('button', 'primary-button', actionLabel);
+      button.type = 'button';
+      button.addEventListener('click', action);
+      panel.append(button);
+    }
+    results.append(panel);
+  }
+
+  function ready() {
+    scenario.value = 'ready';
+    render();
+    search.focus();
+  }
+
+  function resetFilters() {
+    search.value = '';
+    area.value = '';
+    category.value = '';
+    savedOnly = false;
+    render();
+    search.focus();
+  }
+
+  function render() {
+    results.replaceChildren();
+    byId('saved-count').textContent = String(saved.length);
+    byId('saved-toggle').setAttribute('aria-pressed', String(savedOnly));
+    byId('section-kicker').textContent = savedOnly ? 'YOUR PERSONAL SHORTLIST' : 'EXPLORE THE DIRECTORY';
+    byId('directory-heading').textContent = savedOnly ? 'A few favourites, together' : 'Find your next connection';
+    byId('reset-filters').hidden = !(search.value || area.value || category.value || savedOnly);
+    const mode = scenario.value;
+    results.setAttribute('aria-busy', String(mode === 'loading'));
+    const count = byId('result-count');
+
+    if (mode === 'loading') {
+      count.textContent = 'Loading demo listings…';
+      statePanel('Finding your neighbourhood', 'This preview simulates loading. Return to the ready state to explore the directory.', 'Show ready state', ready, true);
+    } else if (dataError || mode === 'invalid') {
+      // The scenario uses the actual validator, rather than just hiding healthy cards.
+      let rejected = dataError;
+      if (!dataError) {
+        try { Core.validateProviders([...window.DirectorySample, window.DirectorySample[0]]); }
+        catch (_) { rejected = true; }
+      }
+      count.textContent = rejected ? 'Directory unavailable' : 'Unexpected demo state';
+      statePanel('We couldn’t load these listings', 'The sample data did not pass our checks. No partial or incorrect listings are shown.', dataError ? null : 'Return to ready state', dataError ? null : ready);
+    } else if (mode === 'empty') {
+      count.textContent = '0 demo listings';
+      statePanel('A new neighbourhood awaits', 'There are no listings in this sample directory yet. Preview the ready state to see the complete design.', 'Show sample listings', ready);
+    } else {
+      const matches = Core.filterProviders(providers, { query: search.value, area: area.value, category: category.value, savedOnly }, saved);
+      count.textContent = `${matches.length} ${matches.length === 1 ? 'listing' : 'listings'}${savedOnly ? ' in your saved view' : ' to explore'}`;
+      if (matches.length) for (const provider of matches) results.append(card(provider));
+      else if (savedOnly && saved.length === 0) statePanel('Keep the ones you like', 'Tap a heart on any listing to start your personal shortlist. No account needed.', 'Explore the directory', resetFilters);
+      else statePanel('Nothing here just yet', 'Try another name, neighbourhood or type of support. A broader search may help.', 'Clear filters', resetFilters);
+    }
+    byId('announcer').textContent = count.textContent;
+  }
+
+  search.addEventListener('input', render);
+  area.addEventListener('change', render);
+  category.addEventListener('change', render);
+  scenario.addEventListener('change', render);
+  byId('reset-filters').addEventListener('click', resetFilters);
+  byId('saved-toggle').addEventListener('click', () => { savedOnly = !savedOnly; render(); });
+  byId('close-dialog').addEventListener('click', () => dialog.close());
+  byId('profile-done').addEventListener('click', () => dialog.close());
+  window.addEventListener('storage', (event) => {
+    if (event.key !== STORAGE_KEY && event.key !== null) return;
+    const result = Core.readSaved(event.key === null ? null : event.newValue, knownIds);
+    saved = result.ids;
+    showNotice(result.warning ? 'The saved list in another tab could not be read. This view has been reset.' : 'Your saved list was updated in another tab.');
+    render();
+  });
+  render();
+})();
+
+</script>
+</body>
+</html>
