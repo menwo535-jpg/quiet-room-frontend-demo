@@ -1,0 +1,9 @@
+Validation executed 7 November 2026, Windows / Node.js24.18.0 / Chrome155.
+
+9 core behavior checks pass using the exact inline production core, plus both script syntax checks. Quoted CSV, embedded newline/escaped quote, malformed CSV, duplicate headers, BOM, imported approval reset, ID/label requirements, approved-only export and spreadsheet formula protection are covered.
+
+Actual browser interaction: fictional example load; invalid ID/missing label warning and disabled approval; approve and reject; rejected-record filter; real CSV file chooser import including comma/newline fields; metadata edit immediately resets approval and disables export; actual JSON and CSV downloads inspected on disk, each with only one approved record.
+
+An initial download-event helper timed out although JSON downloaded successfully; the real saved file was checked rather than claiming a helper success or blindly repeating. A real editing-state issue was found in initial UI testing and corrected to update on input; final browser retest confirms pending status and disabled export immediately after editing.
+
+Known limits: no external authority retrieval, live matching, writes or OpenRefine integration. No broad browser/device/screen-reader audit or large-dataset performance validation. Filepicker/CSV import was exercised locally; a full hosted UI rerun may be noted in the delivery record if performed. All sample data is fictional.

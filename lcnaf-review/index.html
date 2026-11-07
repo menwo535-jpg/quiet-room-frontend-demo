@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A fictional, offline authority-record review interface prototype.">
+<title>Authority Review — interface prototype</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#172b3a;background:#f3f6f8;font-size:16px}*{box-sizing:border-box}body{margin:0}header,main{max-width:1150px;margin:auto;padding:24px}header{padding-bottom:8px}h1{font-size:30px;margin:6px 0}h2{font-size:20px;margin-top:0}p{line-height:1.6}small,.muted{color:#526673}a{color:#095f8c}button,input,textarea,select{font:inherit}button,.file-label{display:inline-block;cursor:pointer;border:1px solid #9aafb9;border-radius:6px;background:#fff;padding:10px 14px;color:#183c50}button.primary{background:#126584;color:#fff;border-color:#126584}button:disabled{opacity:.45;cursor:not-allowed}button:hover:not(:disabled){filter:brightness(.95)}:focus-visible{outline:3px solid #e59c28;outline-offset:3px}input,textarea,select{border:1px solid #a8b9c2;border-radius:5px;background:#fff;padding:9px;max-width:100%}textarea{width:100%;min-height:100px;resize:vertical}label{font-weight:600;display:block;margin:12px 0 6px}.notice{border-left:4px solid #cc8b1f;background:#fff5df;padding:13px 18px;border-radius:6px}.grid{display:grid;grid-template-columns:340px minmax(0,1fr);gap:20px}.panel{background:white;border:1px solid #d7e0e6;border-radius:10px;padding:20px;margin-bottom:20px}.tools{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.tools label{margin:0}.record{border-top:1px solid #d7e0e6;padding:18px 0}.record:first-child{border-top:0}.record h3{margin:0;font-size:18px}.record input{width:100%}.record textarea{min-height:65px}.record .fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.record .wide{grid-column:1/-1}.tag{padding:3px 9px;border-radius:20px;background:#e8f0f5;font-size:13px}.invalid{color:#9f2727;background:#fff0f0;padding:8px;border-radius:4px}.hint{font-size:14px;line-height:1.5}.status{min-height:24px;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}.status.error{color:#9f2727}#count{font-weight:650}footer{max-width:1150px;margin:auto;padding:0 24px 30px;font-size:14px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media(max-width:760px){header,main{padding:16px}.grid{grid-template-columns:1fr}.record .fields{grid-template-columns:1fr}.record .wide{grid-column:auto}}
+</style></head>
+<body>
+<header><div class="muted">LCNAF2Wiki · independent interface sample</div><h1>Authority record review</h1>
+<p class="notice"><strong>Fictional demo, not a connected service.</strong> Review supplied records locally. No Library of Congress retrieval, live Wikidata matching or writes, or OpenRefine integration. “Possible match” values are supplied examples, not search results. Your inputs stay in this page's memory; refreshing clears them.</p></header>
+<main class="grid">
+<aside>
+<section class="panel"><h2>1. Add records</h2><p class="hint">Start with fictional examples, paste authority IDs, or import a UTF-8 CSV/JSON file.</p>
+<button id="demo" class="primary">Load fictional examples</button>
+<label for="ids">Authority IDs, one per line</label><textarea id="ids" placeholder="n12345678&#10;n87654321" spellcheck="false"></textarea>
+<button id="add">Add IDs</button>
+<label for="upload">Import CSV or JSON</label><input id="upload" type="file" accept=".csv,.json,text/csv,application/json">
+<p class="hint">CSV columns: <code>id,label,aliases,description,possibleMatch</code>. Separate aliases with <code>|</code>. JSON accepts an array with those fields. Imported records always start pending review.</p>
+<button id="sample">Download sample CSV</button>
+<div id="import-status" role="status" aria-live="polite" class="status"></div></section>
+<section class="panel"><h2>3. Export approved records</h2><p class="hint">Only valid, approved records are included. JSON is the complete handoff; CSV is spreadsheet-safe. No data is sent to another system.</p><div class="tools"><button id="json" disabled>Export JSON</button><button id="csv" disabled>Export CSV</button></div><div id="export-status" role="status" class="status"></div></section>
+</aside>
+<section class="panel"><h2>2. Review proposed metadata</h2><p id="count" role="status">0 records · 0 approved · 0 rejected</p>
+<div class="tools"><label for="filter">Show</label><select id="filter"><option value="all">All records</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="invalid">Needs correction</option></select><button id="clear">Clear records</button></div>
+<p class="hint">Select a decision after checking the supplied fields. A well-formed ID and a label are required for approval. Editing an approved record returns it to pending.</p>
+<div id="review-status" role="status" class="status"></div><div id="records"><p class="muted">No records yet. Load the fictional examples to try the workflow.</p></div></section>
+</main>
+<footer>This sample demonstrates import → validate → edit → approve/reject → export. It does not verify that an ID exists or that a supplied match is correct. <a href="https://github.com/menwo535-jpg/quiet-room-frontend-demo/tree/main/lcnaf-review">Source and run instructions</a></footer>
+<script id="review-core">
+const Core = (() => {
+  const fields = ['id','label','aliases','description','possibleMatch'];
+  function parseCSV(text) {
+    text = String(text).replace(/^\uFEFF/, '');
+    const rows=[]; let row=[], field='', quoted=false, afterQuote=false;
+    for(let i=0;i<text.length;i++) {
+      const c=text[i];
+      if(quoted) { if(c==='"') {if(text[i+1]==='"'){field+='"';i++;}else{quoted=false;afterQuote=true;}}else field+=c; continue; }
+      if(afterQuote && c!==',' && c!=='\r' && c!=='\n') throw new Error('Unexpected text after a closing CSV quote.');
+      if(c==='"'){if(field.length||afterQuote)throw new Error('Unexpected quote in CSV.');quoted=true;}
+      else if(c===','){row.push(field);field='';afterQuote=false;}
+      else if(c==='\r'||c==='\n'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);if(row.some(v=>v!==''))rows.push(row);row=[];field='';afterQuote=false;}
+      else field+=c;
+    }
+    if(quoted)throw new Error('Unclosed CSV quote.');
+    if(field.length||row.length||afterQuote){row.push(field);if(row.some(v=>v!==''))rows.push(row);}
+    if(!rows.length)return [];
+    const headers=rows.shift().map(v=>v.trim());
+    if(!headers.includes('id'))throw new Error('CSV needs an id column.');
+    if(new Set(headers).size!==headers.length)throw new Error('CSV has duplicate column names.');
+    return rows.map((cells,i)=>{if(cells.length!==headers.length)throw new Error('CSV row '+(i+2)+' has the wrong number of columns.');const obj={};headers.forEach((h,j)=>{if(fields.includes(h))obj[h]=cells[j];});return obj;});
+  }
+  function normalize(item) {
+    if(!item || typeof item!=='object' || Array.isArray(item))throw new Error('Each record must be an object.');
+    const str=k=>typeof item[k]==='string'?item[k].trim():'';
+    return {id:str('id').replace(/\s+/g,'').toLowerCase(),label:str('label'),aliases:Array.isArray(item.aliases)?item.aliases.filter(x=>typeof x==='string').map(x=>x.trim()).filter(Boolean):str('aliases').split('|').map(x=>x.trim()).filter(Boolean),description:str('description'),possibleMatch:str('possibleMatch'),decision:'pending'};
+  }
+  function errors(item){const a=[];if(!/^(n|nb|no|nr|ns)\d{8,10}$/.test(item.id))a.push('ID format needs correction (example: n12345678).');if(!item.label)a.push('Add a label before approval.');return a;}
+  function approved(rows){return rows.filter(r=>r.decision==='approved'&&!errors(r).length).map(r=>({id:r.id,label:r.label,aliases:[...r.aliases],description:r.description,possibleMatch:r.possibleMatch}));}
+  function csvCell(v){let s=String(v??'');if(/^[\s]*[=+@-]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
+  function toCSV(rows){return fields.map(csvCell).join(',')+'\r\n'+rows.map(r=>fields.map(k=>csvCell(k==='aliases'?r.aliases.join('|'):r[k])).join(',')).join('\r\n')+'\r\n';}
+  return {fields,parseCSV,normalize,errors,approved,toCSV};
+})();
+</script>
+<script>
+(() => {
+  'use strict';
+  let records=[];
+  const $=id=>document.getElementById(id);
+  const samples=[
+    {id:'n12345678',label:'Demo Person Alpha',aliases:['Alpha, Demo'],description:'Fictional person for interface review',possibleMatch:'Q000000 — supplied fictional match'},
+    {id:'n87654321',label:'Demo Organization Beta',aliases:['Beta Demo'],description:'Fictional organization; no live matching performed',possibleMatch:''},
+    {id:'needs-fixing',label:'',aliases:[],description:'Deliberately incomplete example for validation',possibleMatch:''}
+  ];
+  function message(id,text,error=false){$(id).textContent=text;$(id).classList.toggle('error',error);}
+  function importItems(items){
+    if(!Array.isArray(items))throw new Error('JSON must contain an array of record objects.');
+    if(items.length>1000)throw new Error('This demo accepts up to 1,000 records per import.');
+    const normalized=items.map(Core.normalize), seen=new Set(records.map(r=>r.id));let duplicates=0,added=0;
+    normalized.forEach(r=>{if(seen.has(r.id)){duplicates++;return;}seen.add(r.id);records.push(r);added++;});
+    render();message('import-status',`${added} records added; ${duplicates} duplicate IDs skipped. ${records.filter(r=>Core.errors(r).length).length} records need correction.`);
+  }
+  function field(label,value,multiline=false){const wrap=document.createElement('div'),input=document.createElement(multiline?'textarea':'input');const id='field-'+Math.random().toString(36).slice(2);input.id=id;input.value=value;const l=document.createElement('label');l.htmlFor=id;l.textContent=label;wrap.append(l,input);return {wrap,input};}
+  function render(){
+    const approved=Core.approved(records);$('count').textContent=`${records.length} records · ${approved.length} approved · ${records.filter(r=>r.decision==='rejected').length} rejected`;
+    $('json').disabled=$('csv').disabled=!approved.length;
+    const target=$('records');target.replaceChildren();const filter=$('filter').value;
+    const visible=records.filter(r=>filter==='all'||(filter==='invalid'?Core.errors(r).length:r.decision===filter));
+    if(!visible.length){const p=document.createElement('p');p.className='muted';p.textContent=records.length?'No records match this filter.':'No records yet. Load the fictional examples to try the workflow.';target.append(p);return;}
+    visible.forEach(r=>{
+      const article=document.createElement('article');article.className='record';
+      const title=document.createElement('h3');title.textContent=r.label||'Record needing a label';const tag=document.createElement('span');tag.className='tag';tag.textContent=r.decision;article.append(title,tag);
+      const issues=Core.errors(r);if(issues.length){const p=document.createElement('p');p.className='invalid';p.textContent=issues.join(' ');article.append(p);}
+      const fields=document.createElement('div');fields.className='fields';
+      for(const [key,label,multi] of [['id','Authority ID',false],['label','Label',false],['aliases','Aliases (separate with |)',false],['possibleMatch','Supplied possible match — not verified',false],['description','Description',true]]){
+        const f=field(label,key==='aliases'?r.aliases.join(' | '):r[key],multi);if(multi)f.wrap.className='wide';
+        f.input.addEventListener('input',()=>{const val=f.input.value.trim();if(key==='id'){const id=val.replace(/\s+/g,'').toLowerCase();if(records.some(other=>other!==r&&other.id===id)){message('review-status','That ID is already present. The original ID was kept.',true);f.input.value=r.id;return;}r.id=id;}else r[key]=key==='aliases'?val.split('|').map(x=>x.trim()).filter(Boolean):val;r.decision='pending';title.textContent=r.label||'Record needing a label';tag.textContent='pending';select.value='pending';message('review-status','Record updated and returned to pending review.');const approved=Core.approved(records);$('count').textContent=`${records.length} records · ${approved.length} approved · ${records.filter(x=>x.decision==='rejected').length} rejected`;$('json').disabled=$('csv').disabled=!approved.length;});f.input.addEventListener('change',render);fields.append(f.wrap);
+      }
+      const decision=field('Decision','');const select=document.createElement('select');select.id=decision.input.id;
+      for(const [value,label] of [['pending','Pending'],['approved','Approved'],['rejected','Rejected']]){const opt=document.createElement('option');opt.value=value;opt.textContent=label;opt.disabled=value==='approved'&&issues.length>0;select.append(opt);}select.value=r.decision;decision.input.replaceWith(select);
+      select.addEventListener('change',()=>{if(select.value==='approved'&&Core.errors(r).length){message('review-status','Correct the ID and label before approval.',true);render();return;}r.decision=select.value;message('review-status','Decision saved. Only valid approved records are exported.');render();});fields.append(decision.wrap);article.append(fields);target.append(article);
+    });
+  }
+  function download(name,text,type){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+  $('demo').addEventListener('click',()=>{try{importItems(samples);}catch(e){message('import-status',e.message,true);}});
+  $('add').addEventListener('click',()=>{const ids=$('ids').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(!ids.length){message('import-status','Enter at least one ID.',true);return;}try{importItems(ids.map(id=>({id})));}catch(e){message('import-status',e.message,true);}});
+  $('upload').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2*1024*1024)throw new Error('Use a file smaller than 2 MB.');const text=await file.text();importItems(file.name.toLowerCase().endsWith('.json')?JSON.parse(text):Core.parseCSV(text));}catch(err){message('import-status','Import failed: '+err.message,true);}finally{e.target.value='';}});
+  $('sample').addEventListener('click',()=>download('fictional-authority-records.csv',Core.toCSV(samples),'text/csv;charset=utf-8'));
+  $('filter').addEventListener('change',render);
+  $('clear').addEventListener('click',()=>{records=[];render();message('review-status','All records cleared.');message('import-status','');message('export-status','');});
+  for(const ext of ['json','csv'])$(ext).addEventListener('click',()=>{const rows=Core.approved(records);if(!rows.length)return;download('approved-authority-records.'+ext,ext==='json'?JSON.stringify(rows,null,2):Core.toCSV(rows),ext==='json'?'application/json':'text/csv;charset=utf-8');message('export-status',`Exported ${rows.length} approved records as ${ext.toUpperCase()}.`);});
+})();
+</script></body></html>
